@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tourpedia/ui/pages/get_started.dart';
+import 'package:tourpedia/ui/pages/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: const GetStarted(),
+      home: const Login(),
     );
   }
 }
