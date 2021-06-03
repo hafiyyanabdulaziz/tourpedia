@@ -15,7 +15,10 @@ class _TourismState extends State<Tourism> {
     return Scaffold(
       body: ListView(
         children: [
-          CustomHeader(searchTap: widget.onTap),
+          CustomHeader(
+            searchTap: widget.onTap,
+            type: Type.tourism,
+          ),
           const Text('data'),
         ],
       ),

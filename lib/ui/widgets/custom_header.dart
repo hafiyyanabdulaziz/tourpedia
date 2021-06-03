@@ -3,9 +3,14 @@ import 'package:flutter/widgets.dart';
 import 'package:tourpedia/ui/widgets/custom_search_bar.dart';
 import 'package:tourpedia/utils/my_colors.dart';
 
+enum Type { tourism, culinary }
+
 class CustomHeader extends StatefulWidget {
   final GestureTapCallback? searchTap;
-  const CustomHeader({Key? key, required this.searchTap}) : super(key: key);
+  final Type type;
+  final String saya = "saya";
+  const CustomHeader({Key? key, required this.searchTap, required this.type})
+      : super(key: key);
 
   @override
   _CustomHeaderState createState() => _CustomHeaderState();
@@ -34,11 +39,14 @@ class _CustomHeaderState extends State<CustomHeader> {
               padding: const EdgeInsets.only(top: 5, left: 20, right: 20),
               child: RichText(
                 textAlign: TextAlign.center,
-                text: const TextSpan(
-                  style: TextStyle(fontSize: 24, color: MyColors.black),
+                text: TextSpan(
+                  style: const TextStyle(fontSize: 24, color: MyColors.black),
                   children: [
-                    TextSpan(text: "TOURISM "),
                     TextSpan(
+                        text: (widget.type == Type.tourism)
+                            ? "TOURISM "
+                            : "CULINARY "),
+                    const TextSpan(
                         text: "BANDUNG",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -93,7 +101,7 @@ class _CustomHeaderState extends State<CustomHeader> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         /**
-                               * LOCATION
+                               * LOCATION/MENUS
                                */
                         Container(
                           decoration: const BoxDecoration(
