@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:tourpedia/ui/widgets/custom_header.dart';
 
 class Tourism extends StatefulWidget {
-  const Tourism({Key? key}) : super(key: key);
+  final GestureTapCallback? onTap;
+  const Tourism({Key? key, this.onTap}) : super(key: key);
 
   @override
   _TourismState createState() => _TourismState();
@@ -11,11 +13,11 @@ class _TourismState extends State<Tourism> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Tourism'),
-      ),
-      body: const Center(
-        child: Text('data'),
+      body: ListView(
+        children: [
+          CustomHeader(searchTap: widget.onTap),
+          const Text('data'),
+        ],
       ),
     );
   }

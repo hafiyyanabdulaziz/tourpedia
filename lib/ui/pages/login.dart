@@ -102,8 +102,11 @@ class _LoginState extends State<Login> {
                   labelStyle: TextStyle(color: MyColors.black, fontSize: 15)),
             ),
           ),
-
-          const Center(child: CustomButton(title: 'LOGIN')),
+          Center(
+              child: CustomButton(
+            title: 'LOGIN',
+            onTap: () {},
+          )),
         ],
       ),
     );

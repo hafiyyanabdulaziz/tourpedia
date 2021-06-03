@@ -3,12 +3,15 @@ import 'package:touchable_opacity/touchable_opacity.dart';
 import 'package:tourpedia/utils/my_colors.dart';
 
 class CustomButton extends StatelessWidget {
+  final GestureTapCallback onTap;
   final String title;
-  const CustomButton({Key? key, required this.title}) : super(key: key);
+  const CustomButton({Key? key, required this.title, required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TouchableOpacity(
+      onTap: onTap,
       child: Container(
         child: Center(
           child: Text(

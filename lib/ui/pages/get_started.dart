@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tourpedia/ui/pages/login.dart';
 import 'package:tourpedia/ui/widgets/custom_button.dart';
 import 'package:tourpedia/utils/my_colors.dart';
 
@@ -53,8 +54,15 @@ class GetStarted extends StatelessWidget {
                     //   textAlign: TextAlign.center,
                     // ),
                   ),
-                  const CustomButton(
-                    title: "halo",
+                  CustomButton(
+                    title: "Start Now!",
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Login(),
+                          ));
+                    },
                   ),
                 ],
               ),
