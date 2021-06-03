@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tourpedia/ui/widgets/card_explore.dart';
+import 'package:tourpedia/ui/widgets/card_must_see.dart';
 import 'package:tourpedia/ui/widgets/custom_header.dart';
 
 class Tourism extends StatefulWidget {
@@ -30,9 +31,22 @@ class _TourismState extends State<Tourism> {
               ),
             ),
           ),
+          // ignore: sized_box_for_whitespace
           Container(
-            color: Colors.amber,
-            height: 50,
+            height: 200,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              // ignore: prefer_const_literals_to_create_immutables
+              children: [
+                const CardMustSee(),
+                const CardMustSee(),
+                const CardMustSee(),
+                const CardMustSee(),
+                const CardMustSee(),
+                const CardMustSee(),
+                const CardMustSee(),
+              ],
+            ),
           ),
           const Padding(
             padding: EdgeInsets.only(top: 20, left: 20, right: 20),
