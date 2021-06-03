@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tourpedia/ui/widgets/card_explore.dart';
 import 'package:tourpedia/ui/widgets/custom_header.dart';
 
 class Tourism extends StatefulWidget {
@@ -19,7 +20,33 @@ class _TourismState extends State<Tourism> {
             searchTap: widget.onTap,
             type: Type.tourism,
           ),
-          const Text('data'),
+          const Padding(
+            padding: EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 10),
+            child: Text(
+              'Must See',
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          Container(
+            color: Colors.amber,
+            height: 50,
+          ),
+          const Padding(
+            padding: EdgeInsets.only(top: 20, left: 20, right: 20),
+            child: Text(
+              'Explore',
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          const CardExplore(),
+          const CardExplore(),
+          const CardExplore(),
         ],
       ),
     );
