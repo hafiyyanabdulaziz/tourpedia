@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tourpedia/models/tourism_model.dart';
+import 'package:tourpedia/services/tourism_services.dart';
 import 'package:tourpedia/ui/widgets/card_explore.dart';
 import 'package:tourpedia/ui/widgets/card_must_see.dart';
 import 'package:tourpedia/ui/widgets/custom_header.dart';
@@ -12,6 +14,22 @@ class Tourism extends StatefulWidget {
 }
 
 class _TourismState extends State<Tourism> {
+  TourismModel tourismModel = TourismModel();
+
+  void getDataTourism() async {
+    await TourismServices().getDataTourismExplore().then((value) {
+      setState(() {
+        tourismModel = value!;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getDataTourism();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,9 +76,17 @@ class _TourismState extends State<Tourism> {
               ),
             ),
           ),
-          const CardExplore(),
-          const CardExplore(),
-          const CardExplore(),
+          (tourismModel.data == null)
+              ? const Center(child: CircularProgressIndicator())
+              : ListView.builder(
+                  shrinkWrap: true,
+                  //physics: const ClampingScrollPhysics(),
+                  itemCount: tourismModel.data!.length,
+                  itemBuilder: (context, index) => const CardExplore(),
+                ),
+          // const CardExplore(),
+          // const CardExplore(),
+          // const CardExplore(),
         ],
       ),
     );
