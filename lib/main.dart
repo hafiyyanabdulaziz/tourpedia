@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tourpedia/ui/widgets/bottom_tab_bar.dart';
+import 'package:tourpedia/ui/pages/detail.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: const BottomTabBar(),
+      home: const Detail(),
     );
   }
 }
