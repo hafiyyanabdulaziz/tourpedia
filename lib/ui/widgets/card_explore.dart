@@ -2,17 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:touchable_opacity/touchable_opacity.dart';
 import 'package:tourpedia/utils/my_colors.dart';
 
-class CardExplore extends StatelessWidget {
-  final String? imageURL;
-  final String? name;
-  final bool? isFavorite;
-  const CardExplore(
+// ignore: must_be_immutable
+class CardExplore extends StatefulWidget {
+  final String imageURL;
+  final String name;
+  bool isFavorite;
+  CardExplore(
       {Key? key,
       required this.imageURL,
       required this.name,
       required this.isFavorite})
       : super(key: key);
 
+  @override
+  State<CardExplore> createState() => _CardExploreState();
+}
+
+class _CardExploreState extends State<CardExplore> {
   @override
   Widget build(BuildContext context) {
     return TouchableOpacity(
@@ -27,7 +33,7 @@ class CardExplore extends StatelessWidget {
                 borderRadius: const BorderRadius.all(Radius.circular(20)),
                 color: Colors.amber,
                 image: DecorationImage(
-                  image: NetworkImage(imageURL!),
+                  image: NetworkImage(widget.imageURL),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -44,7 +50,7 @@ class CardExplore extends StatelessWidget {
                   color: MyColors.bluePrimary.withOpacity(0.75),
                 ),
                 child: Text(
-                  name!,
+                  widget.name,
                   style: const TextStyle(
                     color: MyColors.white,
                     fontSize: 20,
@@ -57,11 +63,17 @@ class CardExplore extends StatelessWidget {
               right: 20,
               top: 20,
               child: TouchableOpacity(
-                onTap: () {},
-                child: const Icon(
+                onTap: () {
+                  setState(() {
+                    widget.isFavorite = !widget.isFavorite;
+                    debugPrint('press');
+                    debugPrint(widget.isFavorite.toString());
+                  });
+                },
+                child: Icon(
                   Icons.favorite,
                   size: 35,
-                  color: MyColors.white,
+                  color: (widget.isFavorite) ? MyColors.button : MyColors.white,
                 ),
               ),
             ),

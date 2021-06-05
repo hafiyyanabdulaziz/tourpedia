@@ -14,9 +14,10 @@ class Tourism extends StatefulWidget {
 }
 
 class _TourismState extends State<Tourism> {
-  TourismModel tourismModel = TourismModel();
+  TourismModel tourismModel = TourismModel(data: [], message: '');
+  bool loading = true;
 
-  void getDataTourism() async {
+  Future<void> getDataTourism() async {
     await TourismServices().getDataTourismExplore().then((value) {
       setState(() {
         tourismModel = value!;
@@ -27,7 +28,7 @@ class _TourismState extends State<Tourism> {
   @override
   void initState() {
     super.initState();
-    getDataTourism();
+    getDataTourism().whenComplete(() => loading = false);
   }
 
   @override
@@ -76,21 +77,18 @@ class _TourismState extends State<Tourism> {
               ),
             ),
           ),
-          (tourismModel.data == null)
+          (loading)
               ? const Center(child: CircularProgressIndicator())
               : ListView.builder(
                   shrinkWrap: true,
-                  //physics: const ClampingScrollPhysics(),
-                  itemCount: tourismModel.data!.length,
+                  physics: const ClampingScrollPhysics(),
+                  itemCount: tourismModel.data.length,
                   itemBuilder: (context, index) => CardExplore(
-                    imageURL: tourismModel.data![index].mainImage,
-                    isFavorite: tourismModel.data![index].isFavorite,
-                    name: tourismModel.data![index].name,
+                    imageURL: tourismModel.data[index].mainImage,
+                    isFavorite: tourismModel.data[index].isFavorite,
+                    name: tourismModel.data[index].name,
                   ),
                 ),
-          // const CardExplore(),
-          // const CardExplore(),
-          // const CardExplore(),
         ],
       ),
     );

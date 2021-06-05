@@ -11,12 +11,12 @@ String tourismModelToJson(TourismModel data) => json.encode(data.toJson());
 
 class TourismModel {
   TourismModel({
-    this.data,
-    this.message,
+    required this.data,
+    required this.message,
   });
 
-  List<Datum>? data;
-  String? message;
+  List<Datum> data;
+  String message;
 
   factory TourismModel.fromJson(Map<String, dynamic> json) => TourismModel(
         data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
@@ -24,23 +24,23 @@ class TourismModel {
       );
 
   Map<String, dynamic> toJson() => {
-        "data": List<dynamic>.from(data!.map((x) => x.toJson())),
+        "data": List<dynamic>.from(data.map((x) => x.toJson())),
         "message": message,
       };
 }
 
 class Datum {
   Datum({
-    this.id,
-    this.mainImage,
-    this.name,
-    this.isFavorite,
+    required this.id,
+    required this.mainImage,
+    required this.name,
+    required this.isFavorite,
   });
 
-  int? id;
-  String? mainImage;
-  String? name;
-  bool? isFavorite;
+  int id;
+  String mainImage;
+  String name;
+  bool isFavorite;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         id: json["id"],
