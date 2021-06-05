@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:touchable_opacity/touchable_opacity.dart';
+import 'package:tourpedia/ui/widgets/card_rating.dart';
 import 'package:tourpedia/ui/widgets/image_slider.dart';
+import 'package:tourpedia/ui/widgets/maps.dart';
+import 'package:tourpedia/ui/widgets/stars_in_rating.dart';
 import 'package:tourpedia/utils/my_colors.dart';
 
 final List<String> imgList = [
@@ -25,7 +28,6 @@ class _DetailState extends State<Detail> {
     return Scaffold(
       backgroundColor: MyColors.white,
       body: ListView(
-        // ignore: prefer_const_literals_to_create_immutables
         children: [
           Stack(
             children: [
@@ -42,68 +44,170 @@ class _DetailState extends State<Detail> {
                           topRight: Radius.circular(15))),
                 ),
               ),
-              TouchableOpacity(
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: MyColors.white,
-                    shape: BoxShape.circle,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TouchableOpacity(
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: MyColors.white,
+                        shape: BoxShape.circle,
+                      ),
+                      margin: const EdgeInsets.only(top: 20, left: 20),
+                      padding: const EdgeInsets.all(5),
+                      child: const Icon(
+                        Icons.arrow_back,
+                        size: 30,
+                      ),
+                    ),
                   ),
-                  margin: const EdgeInsets.only(top: 20, left: 20),
-                  padding: const EdgeInsets.all(5),
-                  child: const Icon(
-                    Icons.arrow_back,
-                    size: 30,
+                  TouchableOpacity(
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: MyColors.white,
+                        shape: BoxShape.circle,
+                      ),
+                      margin: const EdgeInsets.only(top: 20, right: 20),
+                      padding: const EdgeInsets.all(5),
+                      child: const Icon(
+                        Icons.favorite_border,
+                        size: 30,
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
             ],
           ),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
-          const Text('data'),
+          /**
+           * NAME
+           */
+          const Padding(
+            padding: EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 15),
+            child: Text(
+              'Gunung Tangkuban Perahu',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            // ignore: prefer_const_literals_to_create_immutables
+            children: [
+              /**
+               * REVIEW
+               */
+              Column(
+                children: [
+                  Row(
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      const Icon(
+                        Icons.star_rounded,
+                        size: 30,
+                        color: MyColors.button,
+                      ),
+                      const Text(
+                        '4.5',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ],
+                  ),
+                  const Text(
+                    '20 Ulasan',
+                    style: TextStyle(fontSize: 14),
+                  ),
+                ],
+              ),
+              Column(
+                // ignore: prefer_const_literals_to_create_immutables
+                children: [
+                  const Icon(
+                    Icons.favorite_border,
+                    size: 30,
+                  ),
+                  const Text('15 Favorites'),
+                ],
+              ),
+            ],
+          ),
+          /**
+           * ABOUT
+           */
+          const Padding(
+            padding: EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 5),
+            child: Text(
+              'Tentang',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 20),
+            child: Text(
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Scelerisque adipiscing in aliquet turpis ut amet. Mattis fermentum, purus nisi, id eget. Eget lacus, facilisis fermentum odio sagittis, mattis euismod quam. Urna habitant amet lectus cursus senectus ultricies risus feugiat. Fusce netus interdum hac vehicula gravida tempus leo volutpat eu. Neque quisque nisi, vestibulum molestie faucibus vestibulum a massa. Pretium risus, augue eget ut. In mauris, porttitor risus eget sed accumsan tellus.',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ),
+          const Maps(),
+          Padding(
+            padding:
+                const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // ignore: prefer_const_literals_to_create_immutables
+              children: [
+                const Text(
+                  'Rating dan Ulasan',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('Buat Ulasan'),
+                )
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Row(
+              // ignore: prefer_const_literals_to_create_immutables
+              children: [
+                const Icon(
+                  Icons.star_rounded,
+                  size: 25,
+                  color: MyColors.button,
+                ),
+                const Text(
+                  '4.5 / 5',
+                  style: TextStyle(fontSize: 15),
+                ),
+              ],
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.only(left: 20),
+            child: Text(
+              '20 Ulasan',
+              style: TextStyle(fontSize: 14),
+            ),
+          ),
+          const CardRating(),
+          const CardRating(),
+          const CardRating(),
+          const CardRating(),
+          const CardRating(),
+          const SizedBox(height: 20),
         ],
       ),
     );
