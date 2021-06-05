@@ -82,7 +82,11 @@ class _TourismState extends State<Tourism> {
                   shrinkWrap: true,
                   //physics: const ClampingScrollPhysics(),
                   itemCount: tourismModel.data!.length,
-                  itemBuilder: (context, index) => const CardExplore(),
+                  itemBuilder: (context, index) => CardExplore(
+                    imageURL: tourismModel.data![index].mainImage,
+                    isFavorite: tourismModel.data![index].isFavorite,
+                    name: tourismModel.data![index].name,
+                  ),
                 ),
           // const CardExplore(),
           // const CardExplore(),

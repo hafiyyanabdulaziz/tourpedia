@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tourpedia/ui/widgets/card_explore.dart';
 import 'package:tourpedia/ui/widgets/card_must_see.dart';
 import 'package:tourpedia/ui/widgets/custom_header.dart';
 
@@ -57,9 +56,6 @@ class _CulinaryState extends State<Culinary> {
               ),
             ),
           ),
-          const CardExplore(),
-          const CardExplore(),
-          const CardExplore(),
         ],
       ),
     );

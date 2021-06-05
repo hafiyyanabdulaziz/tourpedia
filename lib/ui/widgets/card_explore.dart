@@ -3,7 +3,15 @@ import 'package:touchable_opacity/touchable_opacity.dart';
 import 'package:tourpedia/utils/my_colors.dart';
 
 class CardExplore extends StatelessWidget {
-  const CardExplore({Key? key}) : super(key: key);
+  final String? imageURL;
+  final String? name;
+  final bool? isFavorite;
+  const CardExplore(
+      {Key? key,
+      required this.imageURL,
+      required this.name,
+      required this.isFavorite})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +23,11 @@ class CardExplore extends StatelessWidget {
           children: [
             Container(
               height: 250,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(20)),
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
                 color: Colors.amber,
                 image: DecorationImage(
-                  image: AssetImage('lib/assets/images/city_bandung.jpg'),
+                  image: NetworkImage(imageURL!),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -35,9 +43,9 @@ class CardExplore extends StatelessWidget {
                       bottomRight: Radius.circular(20)),
                   color: MyColors.bluePrimary.withOpacity(0.75),
                 ),
-                child: const Text(
-                  'Gunung Krakatau',
-                  style: TextStyle(
+                child: Text(
+                  name!,
+                  style: const TextStyle(
                     color: MyColors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
