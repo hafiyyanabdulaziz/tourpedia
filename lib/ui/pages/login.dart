@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:future_progress_dialog/future_progress_dialog.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
+import 'package:tourpedia/models/tourism_model.dart';
 import 'package:tourpedia/ui/widgets/custom_button.dart';
 import 'package:tourpedia/utils/my_colors.dart';
+import 'package:http/http.dart' as http;
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -10,6 +15,9 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  TextEditingController textEditingControllerEmail = TextEditingController();
+  TextEditingController textEditingControllerPassword = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,60 +51,78 @@ class _LoginState extends State<Login> {
               ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 5),
-            child: Row(
-              //crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              // ignore: prefer_const_literals_to_create_immutables
-              children: [
-                Column(
-                  // ignore: prefer_const_literals_to_create_immutables
-                  children: [
-                    const Text(
-                      'LOGIN',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    Container(
-                      height: 2,
-                      margin: const EdgeInsets.only(top: 2),
-                      width: 70,
-                      color: MyColors.bluePrimary,
-                    ),
-                  ],
-                ),
-                Column(
-                  // ignore: prefer_const_literals_to_create_immutables
-                  children: [
-                    const Text(
-                      'REGISTER',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    Container(
-                      height: 2,
-                      margin: const EdgeInsets.only(top: 2),
-                      width: 100,
-                      color: MyColors.bluePrimary,
-                    ),
-                  ],
-                ),
-              ],
-            ),
+          // Padding(
+          //   padding: const EdgeInsets.only(bottom: 5),
+          //   child: Row(
+          //     //crossAxisAlignment: CrossAxisAlignment.center,
+          //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //     // ignore: prefer_const_literals_to_create_immutables
+          //     children: [
+          //       Column(
+          //         // ignore: prefer_const_literals_to_create_immutables
+          //         children: [
+          //           const Text(
+          //             'LOGIN',
+          //             style: TextStyle(fontSize: 20),
+          //           ),
+          //           Container(
+          //             height: 2,
+          //             margin: const EdgeInsets.only(top: 2),
+          //             width: 70,
+          //             color: MyColors.bluePrimary,
+          //           ),
+          //         ],
+          //       ),
+          //       Column(
+          //         // ignore: prefer_const_literals_to_create_immutables
+          //         children: [
+          //           const Text(
+          //             'REGISTER',
+          //             style: TextStyle(fontSize: 20),
+          //           ),
+          //           Container(
+          //             height: 2,
+          //             margin: const EdgeInsets.only(top: 2),
+          //             width: 100,
+          //             color: MyColors.bluePrimary,
+          //           ),
+          //         ],
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          Column(
+            // ignore: prefer_const_literals_to_create_immutables
+            children: [
+              const Text(
+                'LOGIN',
+                style: TextStyle(fontSize: 20),
+              ),
+              Container(
+                height: 2,
+                margin: const EdgeInsets.only(top: 2),
+                width: 70,
+                color: MyColors.bluePrimary,
+              ),
+            ],
           ),
-          const Padding(
-            padding: EdgeInsets.only(left: 20, right: 20, top: 30),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
             child: TextField(
-              decoration: InputDecoration(
+              controller: textEditingControllerEmail,
+              decoration: const InputDecoration(
                   fillColor: Colors.amber,
                   labelText: "Email Address",
                   labelStyle: TextStyle(color: MyColors.black, fontSize: 15)),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 50),
+          Padding(
+            padding:
+                const EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 50),
             child: TextField(
+              controller: textEditingControllerPassword,
               obscureText: true,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   fillColor: Colors.amber,
                   labelText: "Password",
                   labelStyle: TextStyle(color: MyColors.black, fontSize: 15)),
@@ -105,10 +131,39 @@ class _LoginState extends State<Login> {
           Center(
               child: CustomButton(
             title: 'LOGIN',
-            onTap: () {},
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) => FutureProgressDialog(
+                  _login(),
+                  message: const Text('Loading'),
+                ),
+              );
+            },
           )),
         ],
       ),
     );
+  }
+
+  Future<TourismModel?> _login() async {
+    String url = "https://api.jsonbin.io/b/60bb007892164b68bec0756d";
+    try {
+      http.Response response = await http
+          .get(Uri.parse(url), headers: {"Accept": "aplication/json"});
+      if (response.statusCode == 200) {
+        debugPrint("data tourism success");
+        final tourismModel = tourismModelFromJson(response.body);
+        showTopSnackBar(context,
+            CustomSnackBar.info(message: textEditingControllerPassword.text));
+        return tourismModel;
+      } else {
+        debugPrint("error status " + response.statusCode.toString());
+        return null;
+      }
+    } catch (e) {
+      debugPrint("error catch $e");
+      return null;
+    }
   }
 }

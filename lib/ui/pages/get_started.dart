@@ -54,15 +54,21 @@ class GetStarted extends StatelessWidget {
                     //   textAlign: TextAlign.center,
                     // ),
                   ),
-                  CustomButton(
-                    title: "Start Now!",
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Login(),
-                          ));
-                    },
+                  Column(
+                    children: [
+                      CustomButton(
+                        title: "Login",
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const Login(),
+                              ));
+                        },
+                      ),
+                      const SizedBox(height: 10),
+                      CustomButton(title: 'Register', onTap: () {}),
+                    ],
                   ),
                 ],
               ),

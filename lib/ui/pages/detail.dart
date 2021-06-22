@@ -3,7 +3,6 @@ import 'package:touchable_opacity/touchable_opacity.dart';
 import 'package:tourpedia/ui/widgets/card_rating.dart';
 import 'package:tourpedia/ui/widgets/image_slider.dart';
 import 'package:tourpedia/ui/widgets/maps.dart';
-import 'package:tourpedia/ui/widgets/stars_in_rating.dart';
 import 'package:tourpedia/utils/my_colors.dart';
 
 final List<String> imgList = [
