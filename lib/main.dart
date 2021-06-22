@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:sp_util/sp_util.dart';
 import 'package:tourpedia/ui/pages/get_started.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SpUtil.getInstance();
   runApp(const MyApp());
 }
 

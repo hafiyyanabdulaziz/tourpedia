@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:future_progress_dialog/future_progress_dialog.dart';
+import 'package:sp_util/sp_util.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:tourpedia/models/tourism_model.dart';
+import 'package:tourpedia/models/user_model.dart';
+import 'package:tourpedia/ui/pages/testing.dart';
+import 'package:tourpedia/ui/widgets/bottom_tab_bar.dart';
 import 'package:tourpedia/ui/widgets/custom_button.dart';
 import 'package:tourpedia/utils/my_colors.dart';
 import 'package:http/http.dart' as http;
@@ -147,22 +151,50 @@ class _LoginState extends State<Login> {
   }
 
   Future<TourismModel?> _login() async {
-    String url = "https://api.jsonbin.io/b/60bb007892164b68bec0756d";
+    String url = "http://192.168.1.12:8000/api/user/login";
     try {
-      http.Response response = await http
-          .get(Uri.parse(url), headers: {"Accept": "aplication/json"});
-      if (response.statusCode == 200) {
-        debugPrint("data tourism success");
-        final tourismModel = tourismModelFromJson(response.body);
-        showTopSnackBar(context,
-            CustomSnackBar.info(message: textEditingControllerPassword.text));
-        return tourismModel;
-      } else {
-        debugPrint("error status " + response.statusCode.toString());
+      if (textEditingControllerEmail.text.isEmpty &&
+          textEditingControllerPassword.text.isEmpty) {
+        showTopSnackBar(
+            context,
+            const CustomSnackBar.error(
+                message: 'Email dan Password harus diisi'));
         return null;
+      }
+
+      http.Response response = await http.post(
+        Uri.parse(url),
+        headers: {"Accept": "aplication/json"},
+        body: {
+          "email": textEditingControllerEmail.text,
+          'password': textEditingControllerPassword.text
+        },
+      );
+      if (response.statusCode == 200) {
+        debugPrint(response.body);
+
+        final userModel = userModelFromJson(response.body);
+        SpUtil.putString('token', userModel.data.accessToken);
+        SpUtil.putString('email', userModel.data.user.email);
+        SpUtil.putString('name', userModel.data.user.name);
+        SpUtil.putString('photo', userModel.data.user.profilePhotoUrl);
+        SpUtil.putInt('id', userModel.data.user.id);
+
+        return Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const Testing(),
+            ));
+
+        // showTopSnackBar(context,
+        //     CustomSnackBar.info(message: textEditingControllerPassword.text));
+
+      } else {
+        throw ('Email atau Password salah');
       }
     } catch (e) {
       debugPrint("error catch $e");
+      showTopSnackBar(context, CustomSnackBar.error(message: e.toString()));
       return null;
     }
   }
