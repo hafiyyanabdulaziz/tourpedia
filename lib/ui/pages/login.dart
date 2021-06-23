@@ -5,7 +5,7 @@ import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:tourpedia/models/tourism_model.dart';
 import 'package:tourpedia/models/user_model.dart';
-import 'package:tourpedia/ui/pages/testing.dart';
+import 'package:tourpedia/ui/widgets/bottom_tab_bar.dart';
 import 'package:tourpedia/ui/widgets/custom_button.dart';
 import 'package:tourpedia/utils/my_colors.dart';
 import 'package:http/http.dart' as http;
@@ -179,11 +179,12 @@ class _LoginState extends State<Login> {
         SpUtil.putString('name', userModel.data.user.name);
         SpUtil.putString('photo', userModel.data.user.profilePhotoUrl);
         SpUtil.putInt('id', userModel.data.user.id);
+        Navigator.pop(context);
 
-        return Navigator.push(
+        return Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => const Testing(),
+              builder: (context) => const BottomTabBar(),
             ));
 
         // showTopSnackBar(context,
