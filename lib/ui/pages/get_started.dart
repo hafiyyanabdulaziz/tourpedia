@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tourpedia/ui/pages/login.dart';
+import 'package:tourpedia/ui/pages/register.dart';
 import 'package:tourpedia/ui/widgets/custom_button.dart';
 import 'package:tourpedia/utils/my_colors.dart';
 
@@ -67,7 +68,16 @@ class GetStarted extends StatelessWidget {
                         },
                       ),
                       const SizedBox(height: 10),
-                      CustomButton(title: 'Register', onTap: () {}),
+                      CustomButton(
+                        title: 'Register',
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const Register(),
+                              ));
+                        },
+                      ),
                     ],
                   ),
                 ],
