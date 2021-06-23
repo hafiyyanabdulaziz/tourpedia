@@ -1,15 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:sp_util/sp_util.dart';
 import 'package:tourpedia/ui/pages/get_started.dart';
+import 'package:http/http.dart' as http;
+import 'package:tourpedia/ui/widgets/bottom_tab_bar.dart';
+import 'package:tourpedia/utils/settings.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SpUtil.getInstance();
-  runApp(const MyApp());
+  String url = Settings.urlBackend + '/api/user/about-me';
+  bool isLogin = false;
+  String token = SpUtil.getString('token', defValue: '')!;
+
+  try {
+    http.Response response = await http.get(
+      Uri.parse(url),
+      headers: {
+        "Accept": "aplication/json",
+        'Authorization': 'Bearer $token',
+      },
+    );
+    if (response.statusCode == 200) {
+      debugPrint("data tourism success");
+      isLogin = true;
+    } else {
+      isLogin = false;
+    }
+  } catch (e) {
+    isLogin = false;
+  }
+
+  runApp(MyApp(
+    isLogin: isLogin,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final bool isLogin;
+  const MyApp({Key? key, required this.isLogin}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -29,7 +57,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: const GetStarted(),
+      home: (isLogin) ? const BottomTabBar() : const GetStarted(),
     );
   }
 }

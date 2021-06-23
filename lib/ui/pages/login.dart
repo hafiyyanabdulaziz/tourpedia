@@ -6,10 +6,10 @@ import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:tourpedia/models/tourism_model.dart';
 import 'package:tourpedia/models/user_model.dart';
 import 'package:tourpedia/ui/pages/testing.dart';
-import 'package:tourpedia/ui/widgets/bottom_tab_bar.dart';
 import 'package:tourpedia/ui/widgets/custom_button.dart';
 import 'package:tourpedia/utils/my_colors.dart';
 import 'package:http/http.dart' as http;
+import 'package:tourpedia/utils/settings.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -151,7 +151,7 @@ class _LoginState extends State<Login> {
   }
 
   Future<TourismModel?> _login() async {
-    String url = "http://192.168.1.12:8000/api/user/login";
+    String url = Settings.urlBackend + "/api/user/login";
     try {
       if (textEditingControllerEmail.text.isEmpty &&
           textEditingControllerPassword.text.isEmpty) {
