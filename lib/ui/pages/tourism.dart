@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tourpedia/models/tourism_model.dart';
 import 'package:tourpedia/services/tourism_services.dart';
+import 'package:tourpedia/ui/pages/detail.dart';
 import 'package:tourpedia/ui/widgets/card_explore.dart';
 import 'package:tourpedia/ui/widgets/card_must_see.dart';
 import 'package:tourpedia/ui/widgets/custom_header.dart';
@@ -91,6 +92,14 @@ class _TourismState extends State<Tourism> {
                         tourismModel.data.item[index].images[0].linkImage,
                     isFavorite: false,
                     name: tourismModel.data.item[index].title,
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                Detail(id: tourismModel.data.item[index].id),
+                          ));
+                    },
                   ),
                 ),
         ],

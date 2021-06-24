@@ -4,6 +4,7 @@ import 'package:tourpedia/utils/my_colors.dart';
 
 // ignore: must_be_immutable
 class CardExplore extends StatefulWidget {
+  final GestureTapCallback onTap;
   final String imageURL;
   final String name;
   bool isFavorite;
@@ -11,7 +12,8 @@ class CardExplore extends StatefulWidget {
       {Key? key,
       required this.imageURL,
       required this.name,
-      required this.isFavorite})
+      required this.isFavorite,
+      required this.onTap})
       : super(key: key);
 
   @override
@@ -22,7 +24,7 @@ class _CardExploreState extends State<CardExplore> {
   @override
   Widget build(BuildContext context) {
     return TouchableOpacity(
-      onTap: () {},
+      onTap: widget.onTap,
       child: Container(
         margin: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
         child: Stack(
