@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:tourpedia/models/tourism_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:tourpedia/utils/settings.dart';
 
 class TourismServices {
   Future<TourismModel?> getDataTourismExplore() async {
-    String url = "https://api.jsonbin.io/b/60bb007892164b68bec0756d";
+    String url = Settings.urlBackend + '/api/destinations';
     try {
       http.Response response = await http
           .get(Uri.parse(url), headers: {"Accept": "aplication/json"});

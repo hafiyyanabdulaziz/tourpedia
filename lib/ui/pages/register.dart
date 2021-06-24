@@ -3,7 +3,7 @@ import 'package:future_progress_dialog/future_progress_dialog.dart';
 import 'package:sp_util/sp_util.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
-import 'package:tourpedia/models/tourism_model.dart';
+import 'package:tourpedia/models/tourism_model.dart' as tourism_model;
 import 'package:tourpedia/models/user_model.dart';
 import 'package:tourpedia/ui/widgets/bottom_tab_bar.dart';
 import 'package:tourpedia/ui/widgets/custom_button.dart';
@@ -145,7 +145,7 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  Future<TourismModel?> _register() async {
+  Future<tourism_model.TourismModel?> _register() async {
     String url = Settings.urlBackend + "/api/user/register";
     try {
       if (textEditingControllerEmail.text.isEmpty &&

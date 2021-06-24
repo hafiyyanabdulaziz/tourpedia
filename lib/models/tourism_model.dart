@@ -11,48 +11,112 @@ String tourismModelToJson(TourismModel data) => json.encode(data.toJson());
 
 class TourismModel {
   TourismModel({
+    required this.meta,
     required this.data,
-    required this.message,
   });
 
-  List<Datum> data;
-  String message;
+  Meta meta;
+  Data data;
 
   factory TourismModel.fromJson(Map<String, dynamic> json) => TourismModel(
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
-        message: json["message"],
+        meta: Meta.fromJson(json["meta"]),
+        data: Data.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "data": List<dynamic>.from(data.map((x) => x.toJson())),
-        "message": message,
+        "meta": meta.toJson(),
+        "data": data.toJson(),
       };
 }
 
-class Datum {
-  Datum({
+class Data {
+  Data({
+    required this.item,
+  });
+
+  List<Item> item;
+
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
+        item: List<Item>.from(json["item"].map((x) => Item.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "item": List<dynamic>.from(item.map((x) => x.toJson())),
+      };
+}
+
+class Item {
+  Item({
     required this.id,
-    required this.mainImage,
-    required this.name,
-    required this.isFavorite,
+    required this.title,
+    required this.description,
+    required this.linkMaps,
+    required this.images,
   });
 
   int id;
-  String mainImage;
-  String name;
-  bool isFavorite;
+  String title;
+  String description;
+  String linkMaps;
+  List<Image> images;
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory Item.fromJson(Map<String, dynamic> json) => Item(
         id: json["id"],
-        mainImage: json["main_image"],
-        name: json["name"],
-        isFavorite: json["is_favorite"],
+        title: json["title"],
+        description: json["description"],
+        linkMaps: json["link_maps"],
+        images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "main_image": mainImage,
-        "name": name,
-        "is_favorite": isFavorite,
+        "title": title,
+        "description": description,
+        "link_maps": linkMaps,
+        "images": List<dynamic>.from(images.map((x) => x.toJson())),
+      };
+}
+
+class Image {
+  Image({
+    required this.id,
+    required this.linkImage,
+  });
+
+  int id;
+  String linkImage;
+
+  factory Image.fromJson(Map<String, dynamic> json) => Image(
+        id: json["id"],
+        linkImage: json["link_image"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "link_image": linkImage,
+      };
+}
+
+class Meta {
+  Meta({
+    required this.code,
+    required this.status,
+    required this.message,
+  });
+
+  int code;
+  String status;
+  String message;
+
+  factory Meta.fromJson(Map<String, dynamic> json) => Meta(
+        code: json["code"],
+        status: json["status"],
+        message: json["message"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "code": code,
+        "status": status,
+        "message": message,
       };
 }

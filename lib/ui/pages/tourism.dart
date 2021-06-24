@@ -4,6 +4,7 @@ import 'package:tourpedia/services/tourism_services.dart';
 import 'package:tourpedia/ui/widgets/card_explore.dart';
 import 'package:tourpedia/ui/widgets/card_must_see.dart';
 import 'package:tourpedia/ui/widgets/custom_header.dart';
+import 'package:tourpedia/utils/settings.dart';
 
 class Tourism extends StatefulWidget {
   final GestureTapCallback? onTap;
@@ -14,7 +15,8 @@ class Tourism extends StatefulWidget {
 }
 
 class _TourismState extends State<Tourism> {
-  TourismModel tourismModel = TourismModel(data: [], message: '');
+  TourismModel tourismModel = TourismModel(
+      data: Data(item: []), meta: Meta(code: 0, status: '', message: ''));
   bool loading = true;
 
   Future<void> getDataTourism() async {
@@ -82,11 +84,13 @@ class _TourismState extends State<Tourism> {
               : ListView.builder(
                   shrinkWrap: true,
                   physics: const ClampingScrollPhysics(),
-                  itemCount: tourismModel.data.length,
+                  itemCount: tourismModel.data.item.length,
                   itemBuilder: (context, index) => CardExplore(
-                    imageURL: tourismModel.data[index].mainImage,
-                    isFavorite: tourismModel.data[index].isFavorite,
-                    name: tourismModel.data[index].name,
+                    imageURL: Settings.urlBackend +
+                        '/storage/' +
+                        tourismModel.data.item[index].images[0].linkImage,
+                    isFavorite: false,
+                    name: tourismModel.data.item[index].title,
                   ),
                 ),
         ],
