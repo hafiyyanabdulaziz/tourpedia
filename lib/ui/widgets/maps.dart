@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:touchable_opacity/touchable_opacity.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Maps extends StatelessWidget {
-  const Maps({Key? key}) : super(key: key);
+  const Maps({Key? key, required this.url}) : super(key: key);
+  final String url;
 
   @override
   Widget build(BuildContext context) {
     return TouchableOpacity(
+      onTap: () async {
+        await canLaunch(url)
+            ? await launch(url)
+            : throw 'tidak bisa membuka $url';
+      },
       child: Stack(
         children: [
           Container(
