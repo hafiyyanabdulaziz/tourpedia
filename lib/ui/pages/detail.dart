@@ -48,7 +48,7 @@ class _DetailState extends State<Detail> {
   @override
   Widget build(BuildContext context) {
     return (loading)
-        ? const Center(child: CircularProgressIndicator())
+        ? const Scaffold(body: Center(child: CircularProgressIndicator()))
         : Scaffold(
             backgroundColor: MyColors.white,
             body: ListView(
