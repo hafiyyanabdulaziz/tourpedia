@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tourpedia/models/culinaries_explore_model.dart';
+import 'package:tourpedia/models/culinaries_random_model.dart'
+    as culinaries_random;
 import 'package:tourpedia/services/culinary_services.dart';
-import 'package:tourpedia/services/tourism_services.dart';
 import 'package:tourpedia/ui/pages/detail.dart';
 import 'package:tourpedia/ui/widgets/card_explore.dart';
 import 'package:tourpedia/ui/widgets/card_must_see.dart';
 import 'package:tourpedia/ui/widgets/custom_header.dart';
-import 'package:tourpedia/models/tourism_model_random.dart' as tourism_random;
 import 'package:tourpedia/utils/settings.dart';
 
 class Culinary extends StatefulWidget {
@@ -17,14 +17,14 @@ class Culinary extends StatefulWidget {
 }
 
 class _CulinaryState extends State<Culinary> {
-  tourism_random.TourismModelRandom tourismModelRandom =
-      tourism_random.TourismModelRandom(
-          meta: tourism_random.Meta(code: 0, message: '', status: ''),
-          data: tourism_random.Data(item: []));
-
   CulinariesExploreModel culinariesExploreModel = CulinariesExploreModel(
       meta: Meta(code: 0, status: '', message: ''),
       data: Data(favorite: 0, item: [], total: 0));
+
+  culinaries_random.CulinariesRandomModel culinariesRandomModel =
+      culinaries_random.CulinariesRandomModel(
+          meta: culinaries_random.Meta(code: 0, status: '', message: ''),
+          data: culinaries_random.Data(item: []));
 
   bool loadingExplore = true;
   bool loadingRandom = true;
@@ -37,10 +37,10 @@ class _CulinaryState extends State<Culinary> {
     });
   }
 
-  Future<void> getDataTourismRandom() async {
-    await TourismServices().getDataTourismRandom().then((value) {
+  Future<void> getDataCulinariesRandom() async {
+    await CulinaryServices().getDataCulinariesRandom().then((value) {
       setState(() {
-        tourismModelRandom = value!;
+        culinariesRandomModel = value!;
       });
     });
   }
@@ -48,7 +48,7 @@ class _CulinaryState extends State<Culinary> {
   @override
   void initState() {
     super.initState();
-    getDataTourismRandom().whenComplete(() => loadingRandom = false);
+    getDataCulinariesRandom().whenComplete(() => loadingRandom = false);
     getDataCulinariesExplore().whenComplete(() => loadingExplore = false);
   }
 
@@ -58,10 +58,10 @@ class _CulinaryState extends State<Culinary> {
       body: ListView(
         children: [
           CustomHeader(
-            itemTotal: 0,
+            itemTotal: culinariesExploreModel.data.total,
             searchTap: () {},
             type: Type.culinary,
-            favoriteTotal: 0,
+            favoriteTotal: culinariesExploreModel.data.favorite,
           ),
           const Padding(
             padding: EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 10),
@@ -82,17 +82,17 @@ class _CulinaryState extends State<Culinary> {
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
                     physics: const ClampingScrollPhysics(),
-                    itemCount: tourismModelRandom.data.item.length,
+                    itemCount: culinariesRandomModel.data.item.length,
                     itemBuilder: (context, index) => CardMustSee(
-                          image: tourismModelRandom
+                          image: culinariesRandomModel
                               .data.item[index].images[0].linkImage,
-                          title: tourismModelRandom.data.item[index].title,
+                          title: culinariesRandomModel.data.item[index].title,
                           onTap: () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => Detail(
-                                      id: tourismModelRandom
+                                      id: culinariesRandomModel
                                           .data.item[index].id),
                                 ));
                           },

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tourpedia/models/culinaries_explore_model.dart';
+import 'package:tourpedia/models/culinaries_random_model.dart';
 import 'package:tourpedia/models/tourism_detail_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:tourpedia/models/tourism_model_random.dart';
 import 'package:tourpedia/utils/settings.dart';
 
 class CulinaryServices {
@@ -45,15 +45,16 @@ class CulinaryServices {
     }
   }
 
-  Future<TourismModelRandom?> getDataTourismRandom() async {
-    String url = Settings.urlBackend + '/api/destinations/random';
+  Future<CulinariesRandomModel?> getDataCulinariesRandom() async {
+    String url = Settings.urlBackend + '/api/culinaries/random';
     try {
       http.Response response = await http
           .get(Uri.parse(url), headers: {"Accept": "aplication/json"});
       if (response.statusCode == 200) {
         debugPrint("data tourism success");
-        final tourismModelRandom = tourismModelRandomFromJson(response.body);
-        return tourismModelRandom;
+        final culinariesRandomModel =
+            culinariesRandomModelFromJson(response.body);
+        return culinariesRandomModel;
       } else {
         debugPrint("error status " + response.statusCode.toString());
         return null;
