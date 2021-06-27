@@ -6,10 +6,16 @@ import 'package:tourpedia/utils/my_colors.dart';
 enum Type { tourism, culinary }
 
 class CustomHeader extends StatefulWidget {
-  final GestureTapCallback? searchTap;
+  final GestureTapCallback searchTap;
+  final int itemTotal;
+  final int favoriteTotal;
   final Type type;
-  final String saya = "saya";
-  const CustomHeader({Key? key, required this.searchTap, required this.type})
+  const CustomHeader(
+      {Key? key,
+      required this.searchTap,
+      required this.type,
+      required this.itemTotal,
+      required this.favoriteTotal})
       : super(key: key);
 
   @override
@@ -109,9 +115,11 @@ class _CustomHeaderState extends State<CustomHeader> {
                             color: MyColors.blueThird,
                           ),
                           padding: const EdgeInsets.all(5),
-                          child: const Text(
-                            '15 Locations',
-                            style: TextStyle(
+                          child: Text(
+                            (widget.type == Type.tourism)
+                                ? widget.itemTotal.toString() + ' Locations'
+                                : widget.itemTotal.toString() + ' Menus',
+                            style: const TextStyle(
                               color: MyColors.white,
                               fontSize: 10,
                               fontWeight: FontWeight.w500,
@@ -128,9 +136,9 @@ class _CustomHeaderState extends State<CustomHeader> {
                             color: MyColors.blueThird,
                           ),
                           padding: const EdgeInsets.all(5),
-                          child: const Text(
-                            '10 Favorites',
-                            style: TextStyle(
+                          child: Text(
+                            widget.favoriteTotal.toString() + ' Favorites',
+                            style: const TextStyle(
                               color: MyColors.white,
                               fontSize: 10,
                               fontWeight: FontWeight.w500,

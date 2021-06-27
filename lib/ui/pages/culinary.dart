@@ -16,8 +16,10 @@ class _CulinaryState extends State<Culinary> {
       body: ListView(
         children: [
           CustomHeader(
+            itemTotal: 0,
             searchTap: () {},
             type: Type.culinary,
+            favoriteTotal: 0,
           ),
           const Padding(
             padding: EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 10),

@@ -41,8 +41,10 @@ class _TourismState extends State<Tourism> {
       body: ListView(
         children: [
           CustomHeader(
-            searchTap: widget.onTap,
+            searchTap: () {},
             type: Type.tourism,
+            favoriteTotal: tourismModel.data.favorite,
+            itemTotal: tourismModel.data.total,
           ),
           const Padding(
             padding: EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 10),
