@@ -17,7 +17,8 @@ class Tourism extends StatefulWidget {
 
 class _TourismState extends State<Tourism> {
   TourismModel tourismModel = TourismModel(
-      data: Data(item: []), meta: Meta(code: 0, status: '', message: ''));
+      data: Data(item: [], favorite: 0, total: 0),
+      meta: Meta(code: 0, status: '', message: ''));
   bool loading = true;
 
   Future<void> getDataTourism() async {

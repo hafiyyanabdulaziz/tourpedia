@@ -32,16 +32,24 @@ class TourismModel {
 class Data {
   Data({
     required this.item,
+    required this.total,
+    required this.favorite,
   });
 
   List<Item> item;
+  int total;
+  int favorite;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         item: List<Item>.from(json["item"].map((x) => Item.fromJson(x))),
+        total: json["total"],
+        favorite: json["favorite"],
       );
 
   Map<String, dynamic> toJson() => {
         "item": List<dynamic>.from(item.map((x) => x.toJson())),
+        "total": total,
+        "favorite": favorite,
       };
 }
 
