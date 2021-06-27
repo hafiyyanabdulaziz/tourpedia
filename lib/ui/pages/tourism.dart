@@ -9,8 +9,7 @@ import 'package:tourpedia/ui/widgets/custom_header.dart';
 import 'package:tourpedia/utils/settings.dart';
 
 class Tourism extends StatefulWidget {
-  final GestureTapCallback? onTap;
-  const Tourism({Key? key, this.onTap}) : super(key: key);
+  const Tourism({Key? key}) : super(key: key);
 
   @override
   _TourismState createState() => _TourismState();
