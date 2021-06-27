@@ -1,22 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:touchable_opacity/touchable_opacity.dart';
 import 'package:tourpedia/utils/my_colors.dart';
+import 'package:tourpedia/utils/settings.dart';
 
 class CardMustSee extends StatelessWidget {
-  const CardMustSee({Key? key}) : super(key: key);
+  final String image;
+  final String title;
+  final GestureTapCallback onTap;
+  const CardMustSee(
+      {Key? key, required this.image, required this.title, required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TouchableOpacity(
+      onTap: onTap,
       child: Stack(
         children: [
           Container(
             margin: const EdgeInsets.only(left: 10, right: 10),
             width: 250,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
               image: DecorationImage(
-                image: AssetImage('lib/assets/images/city_bandung.jpg'),
+                image: NetworkImage(Settings.urlBackend + '/storage/' + image),
                 fit: BoxFit.cover,
               ),
             ),
@@ -33,9 +40,9 @@ class CardMustSee extends StatelessWidget {
                     bottomRight: Radius.circular(10)),
                 color: MyColors.bluePrimary.withOpacity(0.75),
               ),
-              child: const Text(
-                'Gunung Krakatau',
-                style: TextStyle(
+              child: Text(
+                title,
+                style: const TextStyle(
                   color: MyColors.white,
                   fontSize: 13,
                   fontWeight: FontWeight.w500,

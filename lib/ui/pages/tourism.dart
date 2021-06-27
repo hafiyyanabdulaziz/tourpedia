@@ -83,7 +83,20 @@ class _TourismState extends State<Tourism> {
                     shrinkWrap: true,
                     physics: const ClampingScrollPhysics(),
                     itemCount: tourismModelRandom.data.item.length,
-                    itemBuilder: (context, index) => const CardMustSee()),
+                    itemBuilder: (context, index) => CardMustSee(
+                          image: tourismModelRandom
+                              .data.item[index].images[0].linkImage,
+                          title: tourismModelRandom.data.item[index].title,
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Detail(
+                                      id: tourismModelRandom
+                                          .data.item[index].id),
+                                ));
+                          },
+                        )),
           ),
           const Padding(
             padding: EdgeInsets.only(top: 20, left: 20, right: 20),

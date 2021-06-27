@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tourpedia/ui/widgets/card_must_see.dart';
+//import 'package:tourpedia/ui/widgets/card_must_see.dart';
 import 'package:tourpedia/ui/widgets/custom_header.dart';
 
 class Culinary extends StatefulWidget {
@@ -38,13 +38,11 @@ class _CulinaryState extends State<Culinary> {
               scrollDirection: Axis.horizontal,
               // ignore: prefer_const_literals_to_create_immutables
               children: [
-                const CardMustSee(),
-                const CardMustSee(),
-                const CardMustSee(),
-                const CardMustSee(),
-                const CardMustSee(),
-                const CardMustSee(),
-                const CardMustSee(),
+                // CardMustSee(
+                //   image: '',
+                //   title: 'Google',
+                //   onTap: () {},
+                // ),
               ],
             ),
           ),
