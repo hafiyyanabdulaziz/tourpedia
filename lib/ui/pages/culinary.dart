@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tourpedia/models/tourism_model.dart';
+import 'package:tourpedia/models/culinaries_explore_model.dart';
+import 'package:tourpedia/services/culinary_services.dart';
 import 'package:tourpedia/services/tourism_services.dart';
 import 'package:tourpedia/ui/pages/detail.dart';
 import 'package:tourpedia/ui/widgets/card_explore.dart';
@@ -16,22 +17,22 @@ class Culinary extends StatefulWidget {
 }
 
 class _CulinaryState extends State<Culinary> {
-  TourismModel tourismModel = TourismModel(
-      data: Data(item: [], favorite: 0, total: 0),
-      meta: Meta(code: 0, status: '', message: ''));
-
   tourism_random.TourismModelRandom tourismModelRandom =
       tourism_random.TourismModelRandom(
           meta: tourism_random.Meta(code: 0, message: '', status: ''),
           data: tourism_random.Data(item: []));
 
+  CulinariesExploreModel culinariesExploreModel = CulinariesExploreModel(
+      meta: Meta(code: 0, status: '', message: ''),
+      data: Data(favorite: 0, item: [], total: 0));
+
   bool loadingExplore = true;
   bool loadingRandom = true;
 
-  Future<void> getDataTourism() async {
-    await TourismServices().getDataTourismExplore().then((value) {
+  Future<void> getDataCulinariesExplore() async {
+    await CulinaryServices().getDataCulinariesExplore().then((value) {
       setState(() {
-        tourismModel = value!;
+        culinariesExploreModel = value!;
       });
     });
   }
@@ -48,7 +49,7 @@ class _CulinaryState extends State<Culinary> {
   void initState() {
     super.initState();
     getDataTourismRandom().whenComplete(() => loadingRandom = false);
-    getDataTourism().whenComplete(() => loadingExplore = false);
+    getDataCulinariesExplore().whenComplete(() => loadingExplore = false);
   }
 
   @override
@@ -112,19 +113,20 @@ class _CulinaryState extends State<Culinary> {
               : ListView.builder(
                   shrinkWrap: true,
                   physics: const ClampingScrollPhysics(),
-                  itemCount: tourismModel.data.item.length,
+                  itemCount: culinariesExploreModel.data.item.length,
                   itemBuilder: (context, index) => CardExplore(
                     imageURL: Settings.urlBackend +
                         '/storage/' +
-                        tourismModel.data.item[index].images[0].linkImage,
+                        culinariesExploreModel
+                            .data.item[index].images[0].linkImage,
                     isFavorite: false,
-                    name: tourismModel.data.item[index].title,
+                    name: culinariesExploreModel.data.item[index].title,
                     onTap: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                Detail(id: tourismModel.data.item[index].id),
+                            builder: (context) => Detail(
+                                id: culinariesExploreModel.data.item[index].id),
                           ));
                     },
                   ),
