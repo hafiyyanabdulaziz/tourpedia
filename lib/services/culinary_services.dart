@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:tourpedia/models/culinaries_explore_model.dart';
 import 'package:tourpedia/models/culinaries_random_model.dart';
-import 'package:tourpedia/models/tourism_detail_model.dart';
+import 'package:tourpedia/models/culinary_detail_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:tourpedia/utils/settings.dart';
 
 class CulinaryServices {
-  Future<TourismDetailModel?> getDataTourismDetail(int id) async {
-    String url = Settings.urlBackend + '/api/destinations/' + id.toString();
+  Future<CulinaryDetailModel?> getDataCulinaryDetail(int id) async {
+    String url = Settings.urlBackend + '/api/culinaries/' + id.toString();
     try {
       http.Response response = await http
           .get(Uri.parse(url), headers: {"Accept": "aplication/json"});
       if (response.statusCode == 200) {
-        debugPrint("data tourism success");
-        final tourismDetailModel = tourismDetailModelFromJson(response.body);
+        debugPrint("data culinary success");
+        final tourismDetailModel = culinaryDetailModelFromJson(response.body);
         return tourismDetailModel;
       } else {
         debugPrint("error status " + response.statusCode.toString());
@@ -31,7 +31,7 @@ class CulinaryServices {
       http.Response response = await http
           .get(Uri.parse(url), headers: {"Accept": "aplication/json"});
       if (response.statusCode == 200) {
-        debugPrint("data tourism success");
+        debugPrint("data culinary success");
         final culinariesExploreModel =
             culinariesExploreModelFromJson(response.body);
         return culinariesExploreModel;
@@ -51,7 +51,7 @@ class CulinaryServices {
       http.Response response = await http
           .get(Uri.parse(url), headers: {"Accept": "aplication/json"});
       if (response.statusCode == 200) {
-        debugPrint("data tourism success");
+        debugPrint("data culinary success");
         final culinariesRandomModel =
             culinariesRandomModelFromJson(response.body);
         return culinariesRandomModel;

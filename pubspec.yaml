@@ -33,6 +33,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   future_progress_dialog: ^0.2.0
   http: ^0.13.3
+  intl: ^0.17.0
   rflutter_alert: ^2.0.2
   sp_util: ^2.0.3
   top_snackbar_flutter: ^1.0.0

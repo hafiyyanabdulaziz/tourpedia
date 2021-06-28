@@ -3,7 +3,7 @@ import 'package:tourpedia/models/culinaries_explore_model.dart';
 import 'package:tourpedia/models/culinaries_random_model.dart'
     as culinaries_random;
 import 'package:tourpedia/services/culinary_services.dart';
-import 'package:tourpedia/ui/pages/detail.dart';
+import 'package:tourpedia/ui/pages/detail_culinary.dart';
 import 'package:tourpedia/ui/widgets/card_explore.dart';
 import 'package:tourpedia/ui/widgets/card_must_see.dart';
 import 'package:tourpedia/ui/widgets/custom_header.dart';
@@ -91,7 +91,7 @@ class _CulinaryState extends State<Culinary> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => Detail(
+                                  builder: (context) => DetailCulinary(
                                       id: culinariesRandomModel
                                           .data.item[index].id),
                                 ));
@@ -125,7 +125,7 @@ class _CulinaryState extends State<Culinary> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Detail(
+                            builder: (context) => DetailCulinary(
                                 id: culinariesExploreModel.data.item[index].id),
                           ));
                     },
