@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:touchable_opacity/touchable_opacity.dart';
 import 'package:tourpedia/models/tourism_detail_model.dart';
 import 'package:tourpedia/services/tourism_services.dart';
+import 'package:tourpedia/ui/widgets/card_must_see.dart';
 import 'package:tourpedia/ui/widgets/image_slider.dart';
 import 'package:tourpedia/ui/widgets/maps.dart';
 import 'package:tourpedia/utils/my_colors.dart';
 import 'package:tourpedia/utils/settings.dart';
+import 'package:tourpedia/models/tourism_model_random.dart' as tourism_random;
 
 class Detail extends StatefulWidget {
   const Detail({Key? key, required this.id}) : super(key: key);
@@ -21,6 +23,11 @@ class _DetailState extends State<Detail> {
       data: Data(id: 0, title: '', description: '', linkMaps: '', images: []));
   bool loading = true;
 
+  tourism_random.TourismModelRandom tourismModelRandom =
+      tourism_random.TourismModelRandom(
+          meta: tourism_random.Meta(code: 0, message: '', status: ''),
+          data: tourism_random.Data(item: []));
+
   Future<void> getDataDetailTourism() async {
     await TourismServices().getDataTourismDetail(widget.id).then((value) {
       setState(() {
@@ -30,8 +37,17 @@ class _DetailState extends State<Detail> {
     _convertImages();
   }
 
+  Future<void> getDataTourismRandom() async {
+    await TourismServices().getDataTourismRandom().then((value) {
+      setState(() {
+        tourismModelRandom = value!;
+      });
+    });
+  }
+
   @override
   void initState() {
+    getDataTourismRandom();
     getDataDetailTourism().whenComplete(() => loading = false);
     super.initState();
   }
@@ -187,6 +203,40 @@ class _DetailState extends State<Detail> {
                   ),
                 ),
                 Maps(url: tourismDetailModel.data.linkMaps),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 5),
+                  child: Text(
+                    'Rekomendasi Lainnya',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                // ignore: sized_box_for_whitespace
+                Container(
+                  height: 200,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      physics: const ClampingScrollPhysics(),
+                      itemCount: tourismModelRandom.data.item.length,
+                      itemBuilder: (context, index) => CardMustSee(
+                            image: tourismModelRandom
+                                .data.item[index].images[0].linkImage,
+                            title: tourismModelRandom.data.item[index].title,
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Detail(
+                                        id: tourismModelRandom
+                                            .data.item[index].id),
+                                  ));
+                            },
+                          )),
+                ),
                 // Padding(
                 //   padding: const EdgeInsets.only(
                 //       left: 20, right: 20, top: 20, bottom: 5),
