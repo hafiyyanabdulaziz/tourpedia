@@ -70,6 +70,11 @@ class _DetailCulinaryState extends State<DetailCulinary> {
     });
   }
 
+  Future<void> sendFavorite() async {
+    String token = SpUtil.getString('token', defValue: '')!;
+    await FavoriteServices().sendFavoriteCulinary(id: widget.id, token: token);
+  }
+
   @override
   void initState() {
     getDataCulinariesRandom();
@@ -131,6 +136,12 @@ class _DetailCulinaryState extends State<DetailCulinary> {
                           ),
                         ),
                         TouchableOpacity(
+                          onTap: () {
+                            setState(() {
+                              sendFavorite();
+                              isFavorite = !isFavorite;
+                            });
+                          },
                           child: Container(
                             decoration: BoxDecoration(
                               color: (isFavorite)
