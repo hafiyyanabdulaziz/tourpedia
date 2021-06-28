@@ -50,4 +50,52 @@ class FavoriteServices {
       return null;
     }
   }
+
+  Future<bool?> sendFavoriteDestination(
+      {required int id, required String token}) async {
+    String url = Settings.urlBackend +
+        '/api/user/destinations/favorite/' +
+        id.toString();
+    try {
+      http.Response response = await http.post(Uri.parse(url), headers: {
+        "Accept": "aplication/json",
+        'Authorization': 'Bearer $token',
+      });
+      if (response.statusCode == 200) {
+        debugPrint("data favorite success");
+        final favoriteModel = favoriteModelFromJson(response.body);
+        return favoriteModel.data;
+      } else {
+        debugPrint("error status " + response.statusCode.toString());
+        return null;
+      }
+    } catch (e) {
+      debugPrint("error catch $e");
+      return null;
+    }
+  }
+
+  Future<bool?> checkFavoriteDestination(
+      {required int id, required String token}) async {
+    String url = Settings.urlBackend +
+        '/api/user/destinations/check-favorite/' +
+        id.toString();
+    try {
+      http.Response response = await http.get(Uri.parse(url), headers: {
+        "Accept": "aplication/json",
+        'Authorization': 'Bearer $token',
+      });
+      if (response.statusCode == 200) {
+        debugPrint("data favorite success");
+        final favoriteModel = favoriteModelFromJson(response.body);
+        return favoriteModel.data;
+      } else {
+        debugPrint("error status " + response.statusCode.toString());
+        return null;
+      }
+    } catch (e) {
+      debugPrint("error catch $e");
+      return null;
+    }
+  }
 }

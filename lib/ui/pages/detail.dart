@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sp_util/sp_util.dart';
 import 'package:touchable_opacity/touchable_opacity.dart';
 import 'package:tourpedia/models/tourism_detail_model.dart';
+import 'package:tourpedia/services/favorite_services.dart';
 import 'package:tourpedia/services/tourism_services.dart';
 import 'package:tourpedia/ui/widgets/card_must_see.dart';
 import 'package:tourpedia/ui/widgets/image_slider.dart';
@@ -21,7 +23,9 @@ class _DetailState extends State<Detail> {
   TourismDetailModel tourismDetailModel = TourismDetailModel(
       meta: Meta(code: 0, status: '', message: ''),
       data: Data(id: 0, title: '', description: '', linkMaps: '', images: []));
+
   bool loading = true;
+  bool isFavorite = false;
 
   tourism_random.TourismModelRandom tourismModelRandom =
       tourism_random.TourismModelRandom(
@@ -45,9 +49,27 @@ class _DetailState extends State<Detail> {
     });
   }
 
+  Future<void> getStatusFavorite() async {
+    String token = SpUtil.getString('token', defValue: '')!;
+    await FavoriteServices()
+        .checkFavoriteDestination(id: widget.id, token: token)
+        .then((value) {
+      setState(() {
+        isFavorite = value!;
+      });
+    });
+  }
+
+  Future<void> sendFavorite() async {
+    String token = SpUtil.getString('token', defValue: '')!;
+    await FavoriteServices()
+        .sendFavoriteDestination(id: widget.id, token: token);
+  }
+
   @override
   void initState() {
     getDataTourismRandom();
+    getStatusFavorite();
     getDataDetailTourism().whenComplete(() => loading = false);
     super.initState();
   }
@@ -105,9 +127,17 @@ class _DetailState extends State<Detail> {
                           ),
                         ),
                         TouchableOpacity(
+                          onTap: () {
+                            setState(() {
+                              sendFavorite();
+                              isFavorite = !isFavorite;
+                            });
+                          },
                           child: Container(
-                            decoration: const BoxDecoration(
-                              color: MyColors.white,
+                            decoration: BoxDecoration(
+                              color: (isFavorite)
+                                  ? MyColors.button
+                                  : MyColors.white,
                               shape: BoxShape.circle,
                             ),
                             margin: const EdgeInsets.only(top: 20, right: 20),
