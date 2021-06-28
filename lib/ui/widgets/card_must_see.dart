@@ -50,18 +50,6 @@ class CardMustSee extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-            right: 20,
-            top: 10,
-            child: TouchableOpacity(
-              onTap: () {},
-              child: const Icon(
-                Icons.favorite,
-                size: 30,
-                color: MyColors.white,
-              ),
-            ),
-          ),
         ],
       ),
     );

@@ -61,24 +61,6 @@ class _CardExploreState extends State<CardExplore> {
                 ),
               ),
             ),
-            Positioned(
-              right: 20,
-              top: 20,
-              child: TouchableOpacity(
-                onTap: () {
-                  setState(() {
-                    widget.isFavorite = !widget.isFavorite;
-                    debugPrint('press');
-                    debugPrint(widget.isFavorite.toString());
-                  });
-                },
-                child: Icon(
-                  Icons.favorite,
-                  size: 35,
-                  color: (widget.isFavorite) ? MyColors.button : MyColors.white,
-                ),
-              ),
-            ),
           ],
         ),
       ),
