@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tourpedia/ui/pages/favorite_tab_culinary.dart';
+import 'package:tourpedia/ui/pages/favorite_tab_tourism.dart';
 
 class Favorite extends StatefulWidget {
   const Favorite({Key? key}) : super(key: key);
@@ -10,13 +12,22 @@ class Favorite extends StatefulWidget {
 class _FavoriteState extends State<Favorite> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Favorite'),
-      ),
-      body: const Center(
-        child: Text('data'),
-      ),
-    );
+    return DefaultTabController(
+        length: 2,
+        child: Scaffold(
+            appBar: AppBar(
+              title: const Text('Favorite'),
+              centerTitle: true,
+              bottom: const TabBar(tabs: [
+                Tab(text: 'Tourism'),
+                Tab(text: 'Culinary'),
+              ]),
+            ),
+            body: const TabBarView(
+              children: [
+                FavoriteTabTourism(),
+                FavoriteTabCulinary(),
+              ],
+            )));
   }
 }
