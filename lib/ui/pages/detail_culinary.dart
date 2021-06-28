@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:sp_util/sp_util.dart';
 import 'package:touchable_opacity/touchable_opacity.dart';
 import 'package:tourpedia/models/culinary_detail_model.dart';
 import 'package:tourpedia/services/culinary_services.dart';
+import 'package:tourpedia/services/favorite_services.dart';
 import 'package:tourpedia/ui/widgets/card_must_see.dart';
 import 'package:tourpedia/ui/widgets/image_slider.dart';
 import 'package:tourpedia/ui/widgets/maps.dart';
@@ -38,6 +40,7 @@ class _DetailCulinaryState extends State<DetailCulinary> {
           data: culinaries_random.Data(item: []));
 
   bool loading = true;
+  bool isFavorite = false;
 
   Future<void> getDataDetailTourism() async {
     await CulinaryServices().getDataCulinaryDetail(widget.id).then((value) {
@@ -56,9 +59,21 @@ class _DetailCulinaryState extends State<DetailCulinary> {
     });
   }
 
+  Future<void> getStatusFavorite() async {
+    String token = SpUtil.getString('token', defValue: '')!;
+    await FavoriteServices()
+        .checkFavoriteCulinary(id: widget.id, token: token)
+        .then((value) {
+      setState(() {
+        isFavorite = value!;
+      });
+    });
+  }
+
   @override
   void initState() {
     getDataCulinariesRandom();
+    getStatusFavorite();
     getDataDetailTourism().whenComplete(() => loading = false);
     super.initState();
   }
@@ -117,8 +132,10 @@ class _DetailCulinaryState extends State<DetailCulinary> {
                         ),
                         TouchableOpacity(
                           child: Container(
-                            decoration: const BoxDecoration(
-                              color: MyColors.white,
+                            decoration: BoxDecoration(
+                              color: (isFavorite)
+                                  ? MyColors.button
+                                  : MyColors.white,
                               shape: BoxShape.circle,
                             ),
                             margin: const EdgeInsets.only(top: 20, right: 20),
