@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:tourpedia/models/favorite_model.dart';
 import 'package:tourpedia/models/my_list_favorite_model.dart';
+import 'package:tourpedia/models/my_list_favorite_tourism_model.dart';
 import 'package:tourpedia/utils/settings.dart';
 
 class FavoriteServices {
@@ -122,7 +123,7 @@ class FavoriteServices {
     }
   }
 
-  Future<MyListFavoriteModel?> getMyListFavoriteTourism(
+  Future<MyListFavoriteTourismModel?> getMyListFavoriteTourism(
       {required String token}) async {
     String url = Settings.urlBackend + '/api/user/destinations/my-favorites/';
     try {
@@ -132,7 +133,7 @@ class FavoriteServices {
       });
       if (response.statusCode == 200) {
         debugPrint("data favorite success");
-        final favoriteModel = myListFavoriteModelFromJson(response.body);
+        final favoriteModel = myListFavoriteTourismModelFromJson(response.body);
         return favoriteModel;
       } else {
         debugPrint("error status " + response.statusCode.toString());
