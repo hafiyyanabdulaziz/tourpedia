@@ -3,6 +3,7 @@ import 'package:future_progress_dialog/future_progress_dialog.dart';
 import 'package:sp_util/sp_util.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
+import 'package:touchable_opacity/touchable_opacity.dart';
 import 'package:tourpedia/models/tourism_model.dart' as tourism_model;
 import 'package:tourpedia/models/user_model.dart';
 import 'package:tourpedia/ui/widgets/bottom_tab_bar.dart';
@@ -26,6 +27,8 @@ class _RegisterState extends State<Register> {
   TextEditingController textEditingControllerRetypePassword =
       TextEditingController();
 
+  bool canRegister = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,13 +36,34 @@ class _RegisterState extends State<Register> {
       body: ListView(
         children: [
           // ignore: avoid_unnecessary_containers
-          Container(
-            color: MyColors.white,
-            child: const Image(
-              //color: MyColors.white,
-              image: AssetImage(
-                  'lib/assets/images/ilustration_login_register.png'),
-            ),
+          Stack(
+            children: [
+              Container(
+                color: MyColors.white,
+                child: const Image(
+                  //color: MyColors.white,
+                  image: AssetImage(
+                      'lib/assets/images/ilustration_login_register.png'),
+                ),
+              ),
+              TouchableOpacity(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: MyColors.white,
+                    shape: BoxShape.circle,
+                  ),
+                  margin: const EdgeInsets.only(top: 20, left: 20),
+                  padding: const EdgeInsets.all(5),
+                  child: const Icon(
+                    Icons.arrow_back,
+                    size: 30,
+                  ),
+                ),
+              ),
+            ],
           ),
           Stack(
             children: [
@@ -129,14 +153,22 @@ class _RegisterState extends State<Register> {
           Center(
               child: CustomButton(
             title: 'REGISTER',
-            onTap: () {
-              showDialog(
+            onTap: () async {
+              await showDialog(
                 context: context,
                 builder: (context) => FutureProgressDialog(
                   _register(),
                   message: const Text('Loading'),
                 ),
               );
+              (canRegister) ? Navigator.pop(context) : null;
+              (canRegister)
+                  ? Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const BottomTabBar(),
+                      ))
+                  : null;
             },
           )),
           const SizedBox(height: 50),
@@ -186,17 +218,11 @@ class _RegisterState extends State<Register> {
         SpUtil.putString('name', userModel.data.user.name);
         SpUtil.putString('photo', userModel.data.user.profilePhotoUrl);
         SpUtil.putInt('id', userModel.data.user.id);
-        Navigator.pop(context);
+        SpUtil.putString('phone', userModel.data.user.phone);
 
-        return Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const BottomTabBar(),
-            ));
+        canRegister = true;
 
-        // showTopSnackBar(context,
-        //     CustomSnackBar.info(message: textEditingControllerPassword.text));
-
+        return null;
       }
       if (response.statusCode == 500) {
         throw ('Email sudah terdaftar sebelumnya');

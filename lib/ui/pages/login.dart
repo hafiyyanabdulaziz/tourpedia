@@ -3,6 +3,7 @@ import 'package:future_progress_dialog/future_progress_dialog.dart';
 import 'package:sp_util/sp_util.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
+import 'package:touchable_opacity/touchable_opacity.dart';
 
 import 'package:tourpedia/models/user_model.dart';
 import 'package:tourpedia/ui/widgets/bottom_tab_bar.dart';
@@ -22,6 +23,8 @@ class _LoginState extends State<Login> {
   TextEditingController textEditingControllerEmail = TextEditingController();
   TextEditingController textEditingControllerPassword = TextEditingController();
 
+  bool canLogin = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,13 +32,34 @@ class _LoginState extends State<Login> {
       body: ListView(
         children: [
           // ignore: avoid_unnecessary_containers
-          Container(
-            color: MyColors.white,
-            child: const Image(
-              //color: MyColors.white,
-              image: AssetImage(
-                  'lib/assets/images/ilustration_login_register.png'),
-            ),
+          Stack(
+            children: [
+              Container(
+                color: MyColors.white,
+                child: const Image(
+                  //color: MyColors.white,
+                  image: AssetImage(
+                      'lib/assets/images/ilustration_login_register.png'),
+                ),
+              ),
+              TouchableOpacity(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: MyColors.white,
+                    shape: BoxShape.circle,
+                  ),
+                  margin: const EdgeInsets.only(top: 20, left: 20),
+                  padding: const EdgeInsets.all(5),
+                  child: const Icon(
+                    Icons.arrow_back,
+                    size: 30,
+                  ),
+                ),
+              ),
+            ],
           ),
           Stack(
             children: [
@@ -55,46 +79,6 @@ class _LoginState extends State<Login> {
               ),
             ],
           ),
-          // Padding(
-          //   padding: const EdgeInsets.only(bottom: 5),
-          //   child: Row(
-          //     //crossAxisAlignment: CrossAxisAlignment.center,
-          //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //     // ignore: prefer_const_literals_to_create_immutables
-          //     children: [
-          //       Column(
-          //         // ignore: prefer_const_literals_to_create_immutables
-          //         children: [
-          //           const Text(
-          //             'LOGIN',
-          //             style: TextStyle(fontSize: 20),
-          //           ),
-          //           Container(
-          //             height: 2,
-          //             margin: const EdgeInsets.only(top: 2),
-          //             width: 70,
-          //             color: MyColors.bluePrimary,
-          //           ),
-          //         ],
-          //       ),
-          //       Column(
-          //         // ignore: prefer_const_literals_to_create_immutables
-          //         children: [
-          //           const Text(
-          //             'REGISTER',
-          //             style: TextStyle(fontSize: 20),
-          //           ),
-          //           Container(
-          //             height: 2,
-          //             margin: const EdgeInsets.only(top: 2),
-          //             width: 100,
-          //             color: MyColors.bluePrimary,
-          //           ),
-          //         ],
-          //       ),
-          //     ],
-          //   ),
-          // ),
           Column(
             // ignore: prefer_const_literals_to_create_immutables
             children: [
@@ -135,14 +119,22 @@ class _LoginState extends State<Login> {
           Center(
               child: CustomButton(
             title: 'LOGIN',
-            onTap: () {
-              showDialog(
+            onTap: () async {
+              await showDialog(
                 context: context,
                 builder: (context) => FutureProgressDialog(
                   _login(),
                   message: const Text('Loading'),
                 ),
               );
+              (canLogin) ? Navigator.pop(context) : null;
+              (canLogin)
+                  ? Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const BottomTabBar(),
+                      ))
+                  : null;
             },
           )),
         ],
@@ -177,15 +169,15 @@ class _LoginState extends State<Login> {
         SpUtil.putString('token', userModel.data.accessToken);
         SpUtil.putString('email', userModel.data.user.email);
         SpUtil.putString('name', userModel.data.user.name);
+        (userModel.data.user.phone != null)
+            ? SpUtil.putString('phone', userModel.data.user.phone)
+            : null;
         SpUtil.putString('photo', userModel.data.user.profilePhotoUrl);
         SpUtil.putInt('id', userModel.data.user.id);
-        Navigator.pop(context);
 
-        return Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const BottomTabBar(),
-            ));
+        canLogin = true;
+
+        return '';
 
         // showTopSnackBar(context,
         //     CustomSnackBar.info(message: textEditingControllerPassword.text));
