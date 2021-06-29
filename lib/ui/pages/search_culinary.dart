@@ -40,26 +40,29 @@ class _SearchCulinaryState extends State<SearchCulinary> {
       appBar: AppBar(title: const Text('Search')),
       body: (loading)
           ? const Center(child: CircularProgressIndicator())
-          : ListView.builder(
-              shrinkWrap: true,
-              physics: const ClampingScrollPhysics(),
-              itemCount: searchCulinaryModel.data.data.length,
-              itemBuilder: (context, index) => CardExplore(
-                imageURL: Settings.urlBackend +
-                    '/storage/' +
-                    searchCulinaryModel.data.data[index].images[0].linkImage,
-                isFavorite: false,
-                name: searchCulinaryModel.data.data[index].title,
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DetailCulinary(
-                            id: searchCulinaryModel.data.data[index].id),
-                      ));
-                },
-              ),
-            ),
+          : (searchCulinaryModel.data.data.isEmpty)
+              ? const Center(child: Text('Data tidak ada'))
+              : ListView.builder(
+                  shrinkWrap: true,
+                  physics: const ClampingScrollPhysics(),
+                  itemCount: searchCulinaryModel.data.data.length,
+                  itemBuilder: (context, index) => CardExplore(
+                    imageURL: Settings.urlBackend +
+                        '/storage/' +
+                        searchCulinaryModel
+                            .data.data[index].images[0].linkImage,
+                    isFavorite: false,
+                    name: searchCulinaryModel.data.data[index].title,
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailCulinary(
+                                id: searchCulinaryModel.data.data[index].id),
+                          ));
+                    },
+                  ),
+                ),
     );
   }
 }

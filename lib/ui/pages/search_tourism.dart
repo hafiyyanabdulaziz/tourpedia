@@ -39,26 +39,28 @@ class _SearchTourismState extends State<SearchTourism> {
       appBar: AppBar(title: const Text('Search')),
       body: (loading)
           ? const Center(child: CircularProgressIndicator())
-          : ListView.builder(
-              shrinkWrap: true,
-              physics: const ClampingScrollPhysics(),
-              itemCount: searchTourismModel.data.data.length,
-              itemBuilder: (context, index) => CardExplore(
-                imageURL: Settings.urlBackend +
-                    '/storage/' +
-                    searchTourismModel.data.data[index].images[0].linkImage,
-                isFavorite: false,
-                name: searchTourismModel.data.data[index].title,
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DetailCulinary(
-                            id: searchTourismModel.data.data[index].id),
-                      ));
-                },
-              ),
-            ),
+          : (searchTourismModel.data.data.isEmpty)
+              ? const Center(child: Text('Data tidak ada'))
+              : ListView.builder(
+                  shrinkWrap: true,
+                  physics: const ClampingScrollPhysics(),
+                  itemCount: searchTourismModel.data.data.length,
+                  itemBuilder: (context, index) => CardExplore(
+                    imageURL: Settings.urlBackend +
+                        '/storage/' +
+                        searchTourismModel.data.data[index].images[0].linkImage,
+                    isFavorite: false,
+                    name: searchTourismModel.data.data[index].title,
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailCulinary(
+                                id: searchTourismModel.data.data[index].id),
+                          ));
+                    },
+                  ),
+                ),
     );
   }
 }

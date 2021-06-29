@@ -44,22 +44,24 @@ class _FavoriteTabTourismState extends State<FavoriteTabTourism> {
     return Scaffold(
       body: (loading)
           ? const Center(child: CircularProgressIndicator())
-          : ListView.builder(
-              shrinkWrap: true,
-              physics: const ClampingScrollPhysics(),
-              itemCount: myListFavoriteModel.data.length,
-              itemBuilder: (context, index) => CardFavorited(
-                text: myListFavoriteModel.data[index].title,
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            Detail(id: myListFavoriteModel.data[index].id),
-                      ));
-                },
-              ),
-            ),
+          : (myListFavoriteModel.data.isEmpty)
+              ? const Center(child: Text('Data tidak ada'))
+              : ListView.builder(
+                  shrinkWrap: true,
+                  physics: const ClampingScrollPhysics(),
+                  itemCount: myListFavoriteModel.data.length,
+                  itemBuilder: (context, index) => CardFavorited(
+                    text: myListFavoriteModel.data[index].title,
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                Detail(id: myListFavoriteModel.data[index].id),
+                          ));
+                    },
+                  ),
+                ),
     );
   }
 }
