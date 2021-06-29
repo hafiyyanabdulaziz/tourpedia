@@ -20,6 +20,7 @@ class _ProfileState extends State<Profile> {
   String name = SpUtil.getString('name', defValue: '')!;
   String phone = SpUtil.getString('phone', defValue: '')!;
   String email = SpUtil.getString('email', defValue: '')!;
+  bool canLogout = false;
 
   @override
   Widget build(BuildContext context) {
@@ -106,14 +107,21 @@ class _ProfileState extends State<Profile> {
                       ),
                       CustomButton(
                         title: 'LOGOUT',
-                        onTap: () {
-                          showDialog(
+                        onTap: () async {
+                          await showDialog(
                             context: context,
                             builder: (context) => FutureProgressDialog(
                               _logout(),
                               message: const Text('Loading'),
                             ),
                           );
+                          (canLogout)
+                              ? Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const GetStarted(),
+                                  ))
+                              : null;
                         },
                       ),
                     ],
@@ -124,20 +132,6 @@ class _ProfileState extends State<Profile> {
           ),
         ],
       ),
-      // body: Center(
-      //   child: CustomButton(
-      //     title: 'LOGOUT',
-      //     onTap: () {
-      //       showDialog(
-      //         context: context,
-      //         builder: (context) => FutureProgressDialog(
-      //           _logout(),
-      //           message: const Text('Loading'),
-      //         ),
-      //       );
-      //     },
-      //   ),
-      // ),
     );
   }
 
@@ -156,12 +150,9 @@ class _ProfileState extends State<Profile> {
         debugPrint(response.body);
 
         SpUtil.clear();
+        canLogout = true;
 
-        return Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const GetStarted(),
-            ));
+        return null;
       } else {
         throw ('Logout Gagal');
       }
