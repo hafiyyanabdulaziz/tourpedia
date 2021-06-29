@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tourpedia/ui/pages/search_culinary.dart';
+import 'package:tourpedia/ui/pages/search_tourism.dart';
+import 'package:tourpedia/ui/widgets/custom_header.dart';
 import 'package:tourpedia/utils/my_colors.dart';
 
 class CustomSearchBar extends StatefulWidget {
-  final GestureTapCallback? searchTap;
-  const CustomSearchBar({Key? key, required this.searchTap}) : super(key: key);
+  final TypeCategory typeCategory;
+
+  const CustomSearchBar({Key? key, required this.typeCategory})
+      : super(key: key);
 
   @override
   State<CustomSearchBar> createState() => _CustomSearchBarState();
@@ -31,11 +35,17 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
           ),
           controller: textEditingController,
           onSubmitted: (value) {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => SearchCulinary(text: value),
-                ));
+            (widget.typeCategory == TypeCategory.culinary)
+                ? Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SearchCulinary(text: value),
+                    ))
+                : Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SearchTourism(text: value),
+                    ));
           },
         ),
       ),

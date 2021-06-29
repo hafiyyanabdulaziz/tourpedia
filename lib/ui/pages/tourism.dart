@@ -57,8 +57,7 @@ class _TourismState extends State<Tourism> {
       body: ListView(
         children: [
           CustomHeader(
-            searchTap: () {},
-            type: Type.tourism,
+            typeCategory: TypeCategory.tourism,
             favoriteTotal: tourismModel.data.favorite,
             itemTotal: tourismModel.data.total,
           ),

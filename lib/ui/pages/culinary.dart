@@ -59,8 +59,7 @@ class _CulinaryState extends State<Culinary> {
         children: [
           CustomHeader(
             itemTotal: culinariesExploreModel.data.total,
-            searchTap: () {},
-            type: Type.culinary,
+            typeCategory: TypeCategory.culinary,
             favoriteTotal: culinariesExploreModel.data.favorite,
           ),
           const Padding(

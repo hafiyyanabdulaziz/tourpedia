@@ -3,17 +3,15 @@ import 'package:flutter/widgets.dart';
 import 'package:tourpedia/ui/widgets/custom_search_bar.dart';
 import 'package:tourpedia/utils/my_colors.dart';
 
-enum Type { tourism, culinary }
+enum TypeCategory { tourism, culinary }
 
 class CustomHeader extends StatefulWidget {
-  final GestureTapCallback searchTap;
   final int itemTotal;
   final int favoriteTotal;
-  final Type type;
+  final TypeCategory typeCategory;
   const CustomHeader(
       {Key? key,
-      required this.searchTap,
-      required this.type,
+      required this.typeCategory,
       required this.itemTotal,
       required this.favoriteTotal})
       : super(key: key);
@@ -37,7 +35,9 @@ class _CustomHeaderState extends State<CustomHeader> {
             /**
                    * SEARCH
                    */
-            CustomSearchBar(searchTap: widget.searchTap),
+            CustomSearchBar(
+              typeCategory: widget.typeCategory,
+            ),
             /**
                    * TOURISM BANDUNG
                    */
@@ -49,7 +49,7 @@ class _CustomHeaderState extends State<CustomHeader> {
                   style: const TextStyle(fontSize: 24, color: MyColors.black),
                   children: [
                     TextSpan(
-                        text: (widget.type == Type.tourism)
+                        text: (widget.typeCategory == TypeCategory.tourism)
                             ? "TOURISM "
                             : "CULINARY "),
                     const TextSpan(
@@ -116,7 +116,7 @@ class _CustomHeaderState extends State<CustomHeader> {
                           ),
                           padding: const EdgeInsets.all(5),
                           child: Text(
-                            (widget.type == Type.tourism)
+                            (widget.typeCategory == TypeCategory.tourism)
                                 ? widget.itemTotal.toString() + ' Locations'
                                 : widget.itemTotal.toString() + ' Menus',
                             style: const TextStyle(
