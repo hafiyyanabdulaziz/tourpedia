@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:tourpedia/ui/pages/search_culinary.dart';
 import 'package:tourpedia/utils/my_colors.dart';
 
 class CustomSearchBar extends StatefulWidget {
@@ -29,6 +30,13 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
             icon: Icon(Icons.search),
           ),
           controller: textEditingController,
+          onSubmitted: (value) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SearchCulinary(text: value),
+                ));
+          },
         ),
       ),
     );
