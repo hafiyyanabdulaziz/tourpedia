@@ -3,7 +3,7 @@ import 'package:sp_util/sp_util.dart';
 import 'package:tourpedia/models/my_list_favorite_tourism_model.dart';
 import 'package:tourpedia/services/favorite_services.dart';
 import 'package:tourpedia/ui/pages/detail.dart';
-import 'package:tourpedia/ui/widgets/card_explore.dart';
+import 'package:tourpedia/ui/widgets/card_favorited.dart';
 
 class FavoriteTabTourism extends StatefulWidget {
   const FavoriteTabTourism({Key? key}) : super(key: key);
@@ -48,11 +48,8 @@ class _FavoriteTabTourismState extends State<FavoriteTabTourism> {
               shrinkWrap: true,
               physics: const ClampingScrollPhysics(),
               itemCount: myListFavoriteModel.data.length,
-              itemBuilder: (context, index) => CardExplore(
-                imageURL:
-                    'https://1.bp.blogspot.com/-q_aWwmxKbPA/YKCGnia76SI/AAAAAAAAK84/s2yqJl7U5eI1AFATqNqe9TeujZGgrIstQCLcBGAsYHQ/s1768/Screenshot%2Bfrom%2B2021-05-16%2B09-39-58.png',
-                isFavorite: false,
-                name: myListFavoriteModel.data[index].title,
+              itemBuilder: (context, index) => CardFavorited(
+                text: myListFavoriteModel.data[index].title,
                 onTap: () {
                   Navigator.push(
                       context,
