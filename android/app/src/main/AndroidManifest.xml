@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kitahukomputer.tourpedia">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    
    <application
         android:label="Tourpedia"
         android:roundIcon="@mipmap/ic_launcher_circle"
