@@ -15,8 +15,7 @@ class SearchCulinary extends StatefulWidget {
 
 class _SearchCulinaryState extends State<SearchCulinary> {
   SearchCulinaryModel searchCulinaryModel = SearchCulinaryModel(
-      meta: Meta(code: 0, message: '', status: ''),
-      data: Data(data: [], total: 0));
+      meta: Meta(code: 0, message: '', status: ''), data: Data(data: []));
 
   bool loading = true;
 

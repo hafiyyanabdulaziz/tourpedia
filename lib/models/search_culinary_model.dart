@@ -34,20 +34,16 @@ class SearchCulinaryModel {
 class Data {
   Data({
     required this.data,
-    required this.total,
   });
 
   List<Datum> data;
-  int total;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
-        total: json["total"],
       );
 
   Map<String, dynamic> toJson() => {
         "data": List<dynamic>.from(data.map((x) => x.toJson())),
-        "total": total,
       };
 }
 
@@ -57,7 +53,9 @@ class Datum {
     required this.title,
     required this.description,
     required this.price,
-    required this.restaurant,
+    required this.time,
+    required this.address,
+    required this.contact,
     required this.linkMaps,
     required this.images,
   });
@@ -65,8 +63,10 @@ class Datum {
   int id;
   String title;
   String description;
-  int price;
-  String restaurant;
+  String price;
+  String time;
+  String address;
+  String contact;
   String linkMaps;
   List<Image> images;
 
@@ -75,7 +75,9 @@ class Datum {
         title: json["title"],
         description: json["description"],
         price: json["price"],
-        restaurant: json["restaurant"],
+        time: json["time"],
+        address: json["address"],
+        contact: json["contact"],
         linkMaps: json["link_maps"],
         images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
       );
@@ -85,7 +87,9 @@ class Datum {
         "title": title,
         "description": description,
         "price": price,
-        "restaurant": restaurant,
+        "time": time,
+        "address": address,
+        "contact": contact,
         "link_maps": linkMaps,
         "images": List<dynamic>.from(images.map((x) => x.toJson())),
       };

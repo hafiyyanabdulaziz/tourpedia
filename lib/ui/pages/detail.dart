@@ -22,7 +22,16 @@ class Detail extends StatefulWidget {
 class _DetailState extends State<Detail> {
   TourismDetailModel tourismDetailModel = TourismDetailModel(
       meta: Meta(code: 0, status: '', message: ''),
-      data: Data(id: 0, title: '', description: '', linkMaps: '', images: []));
+      data: Data(
+          id: 0,
+          title: '',
+          description: '',
+          linkMaps: '',
+          images: [],
+          address: '',
+          category: '',
+          contact: '',
+          time: ''));
 
   bool loading = true;
   bool isFavorite = false;

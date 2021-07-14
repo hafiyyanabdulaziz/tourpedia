@@ -52,6 +52,10 @@ class Datum {
     required this.id,
     required this.title,
     required this.description,
+    required this.category,
+    required this.time,
+    required this.address,
+    required this.contact,
     required this.linkMaps,
     required this.images,
   });
@@ -59,6 +63,10 @@ class Datum {
   int id;
   String title;
   String description;
+  String category;
+  String time;
+  String address;
+  String contact;
   String linkMaps;
   List<Image> images;
 
@@ -66,6 +74,10 @@ class Datum {
         id: json["id"],
         title: json["title"],
         description: json["description"],
+        category: json["category"],
+        time: json["time"],
+        address: json["address"],
+        contact: json["contact"],
         linkMaps: json["link_maps"],
         images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
       );
@@ -74,6 +86,10 @@ class Datum {
         "id": id,
         "title": title,
         "description": description,
+        "category": category,
+        "time": time,
+        "address": address,
+        "contact": contact,
         "link_maps": linkMaps,
         "images": List<dynamic>.from(images.map((x) => x.toJson())),
       };

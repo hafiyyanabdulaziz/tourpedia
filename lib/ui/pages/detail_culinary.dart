@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:sp_util/sp_util.dart';
 import 'package:touchable_opacity/touchable_opacity.dart';
 import 'package:tourpedia/models/culinary_detail_model.dart';
@@ -30,9 +29,11 @@ class _DetailCulinaryState extends State<DetailCulinary> {
           id: 0,
           images: [],
           linkMaps: '',
-          price: 0,
-          restaurant: '',
-          title: ''));
+          price: '',
+          title: '',
+          address: '',
+          contact: '',
+          time: ''));
 
   culinaries_random.CulinariesRandomModel culinariesRandomModel =
       culinaries_random.CulinariesRandomModel(
@@ -259,11 +260,7 @@ class _DetailCulinaryState extends State<DetailCulinary> {
                   padding: const EdgeInsets.only(
                       left: 20, right: 20, top: 5, bottom: 20),
                   child: Text(
-                    NumberFormat.currency(
-                      locale: 'id',
-                      decimalDigits: 0,
-                      symbol: 'Rp ',
-                    ).format(culinaryDetailModel.data.price),
+                    culinaryDetailModel.data.price,
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
@@ -284,12 +281,12 @@ class _DetailCulinaryState extends State<DetailCulinary> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 20, right: 20, top: 5, bottom: 20),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 20),
                   child: Text(
-                    culinaryDetailModel.data.restaurant,
-                    style: const TextStyle(
+                    'Restaurant',
+                    style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
                     ),

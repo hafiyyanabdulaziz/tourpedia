@@ -53,7 +53,9 @@ class Item {
     required this.title,
     required this.description,
     required this.price,
-    required this.restaurant,
+    required this.time,
+    required this.address,
+    required this.contact,
     required this.linkMaps,
     required this.images,
   });
@@ -61,8 +63,10 @@ class Item {
   int id;
   String title;
   String description;
-  int price;
-  String restaurant;
+  String price;
+  String time;
+  String address;
+  String contact;
   String linkMaps;
   List<Image> images;
 
@@ -71,7 +75,9 @@ class Item {
         title: json["title"],
         description: json["description"],
         price: json["price"],
-        restaurant: json["restaurant"],
+        time: json["time"],
+        address: json["address"],
+        contact: json["contact"],
         linkMaps: json["link_maps"],
         images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
       );
@@ -81,7 +87,9 @@ class Item {
         "title": title,
         "description": description,
         "price": price,
-        "restaurant": restaurant,
+        "time": time,
+        "address": address,
+        "contact": contact,
         "link_maps": linkMaps,
         "images": List<dynamic>.from(images.map((x) => x.toJson())),
       };
