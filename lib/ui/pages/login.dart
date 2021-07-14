@@ -6,8 +6,9 @@ import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:touchable_opacity/touchable_opacity.dart';
 
 import 'package:tourpedia/models/user_model.dart';
+import 'package:tourpedia/ui/pages/register.dart';
 import 'package:tourpedia/ui/widgets/bottom_tab_bar.dart';
-import 'package:tourpedia/ui/widgets/custom_button.dart';
+import 'package:tourpedia/ui/widgets/custom_button_small.dart';
 import 'package:tourpedia/utils/my_colors.dart';
 import 'package:http/http.dart' as http;
 import 'package:tourpedia/utils/settings.dart';
@@ -28,115 +29,126 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.greyOne,
+      backgroundColor: MyColors.blueFour,
       body: ListView(
         children: [
           // ignore: avoid_unnecessary_containers
-          Stack(
-            children: [
-              Container(
-                color: MyColors.white,
-                child: const Image(
+          Container(
+            padding: const EdgeInsets.only(top: 40, left: 20, bottom: 20),
+            width: double.infinity,
+            color: MyColors.white,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              // ignore: prefer_const_literals_to_create_immutables
+              children: [
+                const Image(
                   //color: MyColors.white,
                   image: AssetImage(
-                      'lib/assets/images/ilustration_login_register.png'),
+                      'lib/assets/images/illustration_logo_text.png'),
+                  height: 45,
                 ),
-              ),
-              TouchableOpacity(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: MyColors.white,
-                    shape: BoxShape.circle,
-                  ),
-                  margin: const EdgeInsets.only(top: 20, left: 20),
-                  padding: const EdgeInsets.all(5),
-                  child: const Icon(
-                    Icons.arrow_back,
-                    size: 30,
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
+
           Stack(
             children: [
               Container(
-                height: 30,
+                height: 20,
                 color: MyColors.white,
               ),
               Container(
-                height: 30,
+                height: 20,
                 decoration: const BoxDecoration(
-                  color: MyColors.greyOne,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                  ),
-                ),
-              ),
+                    color: MyColors.blueFour,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20))),
+              )
             ],
           ),
-          Column(
-            // ignore: prefer_const_literals_to_create_immutables
-            children: [
-              const Text(
-                'LOGIN',
-                style: TextStyle(fontSize: 20),
-              ),
-              Container(
-                height: 2,
-                margin: const EdgeInsets.only(top: 2),
-                width: 70,
-                color: MyColors.bluePrimary,
-              ),
-            ],
+
+          const Padding(
+            padding: EdgeInsets.only(left: 24, top: 6, bottom: 52),
+            child: Text(
+              'LOGIN',
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
+            ),
           ),
+
           Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
+            padding: const EdgeInsets.only(left: 20, right: 20),
             child: TextField(
               controller: textEditingControllerEmail,
               decoration: const InputDecoration(
                   fillColor: Colors.amber,
-                  labelText: "Email Address",
-                  labelStyle: TextStyle(color: MyColors.black, fontSize: 15)),
+                  labelText: "Email",
+                  labelStyle: TextStyle(
+                      color: MyColors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700)),
             ),
           ),
           Padding(
             padding:
-                const EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 50),
+                const EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 80),
             child: TextField(
               controller: textEditingControllerPassword,
               obscureText: true,
               decoration: const InputDecoration(
                   fillColor: Colors.amber,
                   labelText: "Password",
-                  labelStyle: TextStyle(color: MyColors.black, fontSize: 15)),
+                  labelStyle: TextStyle(
+                      color: MyColors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700)),
             ),
           ),
+
           Center(
-              child: CustomButton(
-            title: 'LOGIN',
-            onTap: () async {
-              await showDialog(
-                context: context,
-                builder: (context) => FutureProgressDialog(
-                  _login(),
-                  message: const Text('Loading'),
-                ),
-              );
-              (canLogin) ? Navigator.pop(context) : null;
-              (canLogin)
-                  ? Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const BottomTabBar(),
-                      ))
-                  : null;
-            },
-          )),
+            child: CustomButtonSmall(
+              title: 'MASUK',
+              onTap: () async {
+                await showDialog(
+                  context: context,
+                  builder: (context) => FutureProgressDialog(
+                    _login(),
+                    message: const Text('Loading'),
+                  ),
+                );
+                (canLogin) ? Navigator.pop(context) : null;
+                (canLogin)
+                    ? Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const BottomTabBar(),
+                        ))
+                    : null;
+              },
+            ),
+          ),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'Belum punya akun?  ',
+                style: TextStyle(fontSize: 14),
+              ),
+              TouchableOpacity(
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Register()));
+                  },
+                  child: const Text(
+                    'Daftar',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+                  ))
+            ],
+          ),
         ],
       ),
     );
