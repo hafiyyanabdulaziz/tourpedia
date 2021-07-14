@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tourpedia/ui/pages/login.dart';
 import 'package:tourpedia/ui/pages/register.dart';
 import 'package:tourpedia/ui/widgets/custom_button.dart';
+import 'package:tourpedia/ui/widgets/custom_button_login.dart';
 import 'package:tourpedia/utils/my_colors.dart';
 
 class GetStarted extends StatelessWidget {
@@ -15,10 +16,18 @@ class GetStarted extends StatelessWidget {
         //mainAxisAlignment: MainAxisAlignment.spaceBetween,
         // ignore: prefer_const_literals_to_create_immutables
         children: [
-          const Image(
-            image: AssetImage('lib/assets/images/ilustration_get_started.png'),
+          const Expanded(
+            flex: 4,
+            child: Center(
+              child: Image(
+                width: 267,
+                image: AssetImage(
+                    'lib/assets/images/illustration_logo_vertical.png'),
+              ),
+            ),
           ),
           Expanded(
+            flex: 3,
             child: Container(
               width: MediaQuery.of(context).size.width,
               //height: 100,
@@ -29,7 +38,7 @@ class GetStarted extends StatelessWidget {
                   topLeft: Radius.circular(30),
                   topRight: Radius.circular(30),
                 ),
-                color: MyColors.bluePrimary,
+                color: MyColors.blueThird,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -40,7 +49,7 @@ class GetStarted extends StatelessWidget {
                     child: RichText(
                       textAlign: TextAlign.center,
                       text: const TextSpan(
-                        style: TextStyle(fontSize: 25, color: MyColors.white),
+                        style: TextStyle(fontSize: 27, color: MyColors.white),
                         children: [
                           TextSpan(text: "Let's start on vacation to "),
                           TextSpan(
@@ -57,7 +66,7 @@ class GetStarted extends StatelessWidget {
                   ),
                   Column(
                     children: [
-                      CustomButton(
+                      CustomButtonLogin(
                         title: "Login",
                         onTap: () {
                           Navigator.push(
