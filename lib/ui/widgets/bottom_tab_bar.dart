@@ -58,22 +58,22 @@ class TabNavigationItem {
         TabNavigationItem(
           page: const Tourism(),
           title: 'Tourism',
-          icon: const Icon(Icons.explore),
+          icon: const Icon(Icons.explore_outlined),
         ),
         TabNavigationItem(
           page: const Culinary(),
           title: 'Culinary',
-          icon: const Icon(Icons.restaurant),
+          icon: const Icon(Icons.restaurant_outlined),
         ),
         TabNavigationItem(
           page: const Favorite(),
           title: 'Favorite',
-          icon: const Icon(Icons.favorite),
+          icon: const Icon(Icons.favorite_outline),
         ),
         TabNavigationItem(
           page: const Profile(),
           title: 'Profile',
-          icon: const Icon(Icons.account_circle),
+          icon: const Icon(Icons.account_circle_outlined),
         ),
       ];
 }

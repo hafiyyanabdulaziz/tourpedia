@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tourpedia/models/tourism_model.dart';
+import 'package:touchable_opacity/touchable_opacity.dart';
+import 'package:tourpedia/models/tourism_model.dart' as tourism_model;
 import 'package:tourpedia/models/tourism_model_random.dart' as tourism_random;
 import 'package:tourpedia/services/tourism_services.dart';
 import 'package:tourpedia/ui/pages/detail.dart';
@@ -17,9 +18,9 @@ class Tourism extends StatefulWidget {
 }
 
 class _TourismState extends State<Tourism> {
-  TourismModel tourismModel = TourismModel(
-      data: Data(item: [], favorite: 0, total: 0),
-      meta: Meta(code: 0, status: '', message: ''));
+  tourism_model.TourismModel tourismModel = tourism_model.TourismModel(
+      data: tourism_model.Data(item: [], favorite: 0, total: 0),
+      meta: tourism_model.Meta(code: 0, status: '', message: ''));
 
   tourism_random.TourismModelRandom tourismModelRandom =
       tourism_random.TourismModelRandom(
@@ -62,6 +63,110 @@ class _TourismState extends State<Tourism> {
             typeCategory: TypeCategory.tourism,
             favoriteTotal: tourismModel.data.favorite,
             itemTotal: tourismModel.data.total,
+          ),
+          /**
+           * Category
+           */
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TouchableOpacity(
+                child: SizedBox(
+                  width: 50,
+                  child: Column(
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      const Image(
+                        height: 33,
+                        image: AssetImage(
+                            'lib/assets/images/icon_wisata_buatan.png'),
+                      ),
+                      const SizedBox(height: 10),
+                      const Text(
+                        'Wisata Buatan',
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              TouchableOpacity(
+                child: SizedBox(
+                  width: 50,
+                  child: Column(
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      const Image(
+                        height: 33,
+                        image: AssetImage(
+                            'lib/assets/images/icon_wisata_alam.png'),
+                      ),
+                      const SizedBox(height: 10),
+                      const Text(
+                        'Wisata Alam',
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              TouchableOpacity(
+                child: SizedBox(
+                  width: 50,
+                  child: Column(
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      const Image(
+                        height: 33,
+                        image:
+                            AssetImage('lib/assets/images/icon_wisata_air.png'),
+                      ),
+                      const SizedBox(height: 10),
+                      const Text(
+                        'Wisata Air',
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              TouchableOpacity(
+                child: SizedBox(
+                  width: 50,
+                  child: Column(
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      const Image(
+                        height: 33,
+                        image: AssetImage(
+                            'lib/assets/images/icon_wisata_binatang.png'),
+                      ),
+                      const SizedBox(height: 10),
+                      const Text(
+                        'Wisata Binatang',
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
           const Padding(
             padding: EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 10),

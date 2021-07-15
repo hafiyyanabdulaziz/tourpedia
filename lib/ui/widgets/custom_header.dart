@@ -24,6 +24,7 @@ class _CustomHeaderState extends State<CustomHeader> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(bottom: 15),
       decoration: const BoxDecoration(
           color: MyColors.bluePrimary,
           borderRadius: BorderRadius.only(
