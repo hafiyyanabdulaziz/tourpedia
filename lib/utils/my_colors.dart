@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class MyColors {
   static const Color button = Color(0xFFFFC569);
   static const Color white = Colors.white;
+  static const Color whiteSecond = Color(0xFFEEEEEE);
+  static const Color whiteThird = Color(0xFFEAEAEA);
   static const Color black = Colors.black;
   static const Color bluePrimary = Color(0xFF5A6EB7);
   static const Color blueSecondary = Color(0xFF2341E0);

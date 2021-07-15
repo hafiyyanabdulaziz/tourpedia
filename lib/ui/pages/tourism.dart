@@ -6,6 +6,7 @@ import 'package:tourpedia/ui/pages/detail.dart';
 import 'package:tourpedia/ui/widgets/card_explore.dart';
 import 'package:tourpedia/ui/widgets/card_must_see.dart';
 import 'package:tourpedia/ui/widgets/custom_header.dart';
+import 'package:tourpedia/utils/my_colors.dart';
 import 'package:tourpedia/utils/settings.dart';
 
 class Tourism extends StatefulWidget {
@@ -54,6 +55,7 @@ class _TourismState extends State<Tourism> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: MyColors.whiteSecond,
       body: ListView(
         children: [
           CustomHeader(
@@ -64,9 +66,9 @@ class _TourismState extends State<Tourism> {
           const Padding(
             padding: EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 10),
             child: Text(
-              'Must See',
+              'Rekomendasi',
               style: TextStyle(
-                fontSize: 12,
+                fontSize: 18,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -101,7 +103,7 @@ class _TourismState extends State<Tourism> {
             child: Text(
               'Explore',
               style: TextStyle(
-                fontSize: 12,
+                fontSize: 18,
                 fontWeight: FontWeight.w500,
               ),
             ),

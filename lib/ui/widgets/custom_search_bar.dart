@@ -22,7 +22,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
     return Center(
       child: Container(
         decoration: const BoxDecoration(
-            color: MyColors.white,
+            color: MyColors.whiteThird,
             borderRadius: BorderRadius.all(Radius.circular(10))),
         margin: const EdgeInsets.only(top: 20, bottom: 10),
         padding: const EdgeInsets.only(left: 15, right: 15),

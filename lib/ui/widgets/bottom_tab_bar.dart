@@ -27,9 +27,10 @@ class _BottomTabBarState extends State<BottomTabBar> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
-        backgroundColor: MyColors.bluePrimary,
-        selectedItemColor: MyColors.button,
-        unselectedItemColor: MyColors.white,
+        backgroundColor: MyColors.white,
+        selectedItemColor: MyColors.blueThird,
+        unselectedItemColor: MyColors.black,
+        elevation: 3,
         onTap: (int index) => setState(
           () => _currentIndex = index,
         ),
@@ -57,7 +58,7 @@ class TabNavigationItem {
         TabNavigationItem(
           page: const Tourism(),
           title: 'Tourism',
-          icon: const Icon(Icons.theater_comedy),
+          icon: const Icon(Icons.explore),
         ),
         TabNavigationItem(
           page: const Culinary(),
