@@ -43,7 +43,7 @@ class CardMustSee extends StatelessWidget {
               child: Text(
                 title,
                 style: const TextStyle(
-                  color: MyColors.white,
+                  color: MyColors.black,
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
                 ),

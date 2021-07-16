@@ -4,6 +4,7 @@ import 'package:tourpedia/models/tourism_model.dart' as tourism_model;
 import 'package:tourpedia/models/tourism_model_random.dart' as tourism_random;
 import 'package:tourpedia/services/tourism_services.dart';
 import 'package:tourpedia/ui/pages/detail.dart';
+import 'package:tourpedia/ui/pages/tourism_category.dart';
 import 'package:tourpedia/ui/widgets/card_explore.dart';
 import 'package:tourpedia/ui/widgets/card_must_see.dart';
 import 'package:tourpedia/ui/widgets/custom_header.dart';
@@ -71,6 +72,15 @@ class _TourismState extends State<Tourism> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               TouchableOpacity(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const TourismCategory(
+                          wisataCategory: WisataCategory.wisataBuatan,
+                        ),
+                      ));
+                },
                 child: SizedBox(
                   width: 50,
                   child: Column(
@@ -95,6 +105,15 @@ class _TourismState extends State<Tourism> {
                 ),
               ),
               TouchableOpacity(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const TourismCategory(
+                          wisataCategory: WisataCategory.wisataAlam,
+                        ),
+                      ));
+                },
                 child: SizedBox(
                   width: 50,
                   child: Column(
@@ -119,6 +138,15 @@ class _TourismState extends State<Tourism> {
                 ),
               ),
               TouchableOpacity(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const TourismCategory(
+                          wisataCategory: WisataCategory.wisataAir,
+                        ),
+                      ));
+                },
                 child: SizedBox(
                   width: 50,
                   child: Column(
@@ -143,6 +171,15 @@ class _TourismState extends State<Tourism> {
                 ),
               ),
               TouchableOpacity(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const TourismCategory(
+                          wisataCategory: WisataCategory.wisataBinatang,
+                        ),
+                      ));
+                },
                 child: SizedBox(
                   width: 50,
                   child: Column(
