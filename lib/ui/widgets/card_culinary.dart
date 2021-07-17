@@ -46,7 +46,7 @@ class _CardCulinaryState extends State<CardCulinary> {
         child: Column(
           children: [
             Container(
-              height: 122,
+              height: 96,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(5), topRight: Radius.circular(5)),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:sp_util/sp_util.dart';
 import 'package:tourpedia/ui/pages/get_started.dart';
 import 'package:http/http.dart' as http;
@@ -41,6 +42,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
     return MaterialApp(
       title: 'Tourpedia',
       theme: ThemeData(
