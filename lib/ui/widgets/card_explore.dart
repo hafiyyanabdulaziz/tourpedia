@@ -25,6 +25,7 @@ class _CardExploreState extends State<CardExplore> {
   Widget build(BuildContext context) {
     return TouchableOpacity(
       onTap: widget.onTap,
+      // ignore: avoid_unnecessary_containers
       child: Container(
         margin: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
         child: Stack(
@@ -33,7 +34,7 @@ class _CardExploreState extends State<CardExplore> {
               height: 250,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(20)),
-                color: Colors.amber,
+                color: MyColors.greySecond,
                 image: DecorationImage(
                   image: NetworkImage(widget.imageURL),
                   fit: BoxFit.cover,

@@ -81,7 +81,7 @@ class _LoginState extends State<Login> {
             child: TextField(
               controller: textEditingControllerEmail,
               decoration: const InputDecoration(
-                  fillColor: Colors.amber,
+                  fillColor: MyColors.greySecond,
                   labelText: "Email",
                   labelStyle: TextStyle(
                       color: MyColors.black,
@@ -96,7 +96,6 @@ class _LoginState extends State<Login> {
               controller: textEditingControllerPassword,
               obscureText: true,
               decoration: const InputDecoration(
-                  fillColor: Colors.amber,
                   labelText: "Password",
                   labelStyle: TextStyle(
                       color: MyColors.black,

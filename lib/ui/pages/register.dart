@@ -85,7 +85,7 @@ class _RegisterState extends State<Register> {
             child: TextField(
               controller: textEditingControllerName,
               decoration: const InputDecoration(
-                  fillColor: Colors.amber,
+                  fillColor: MyColors.greySecond,
                   labelText: "Nama",
                   labelStyle: TextStyle(
                       color: MyColors.black,
@@ -99,7 +99,6 @@ class _RegisterState extends State<Register> {
             child: TextField(
               controller: textEditingControllerEmail,
               decoration: const InputDecoration(
-                  fillColor: Colors.amber,
                   labelText: "Email Address",
                   labelStyle: TextStyle(
                       color: MyColors.black,
@@ -113,7 +112,6 @@ class _RegisterState extends State<Register> {
             child: TextField(
               controller: textEditingControllerPhone,
               decoration: const InputDecoration(
-                  fillColor: Colors.amber,
                   labelText: "No Telephone",
                   labelStyle: TextStyle(
                       color: MyColors.black,
@@ -128,7 +126,6 @@ class _RegisterState extends State<Register> {
               controller: textEditingControllerPassword,
               obscureText: true,
               decoration: const InputDecoration(
-                  fillColor: Colors.amber,
                   labelText: "Password",
                   labelStyle: TextStyle(
                       color: MyColors.black,
@@ -144,7 +141,6 @@ class _RegisterState extends State<Register> {
               controller: textEditingControllerRetypePassword,
               obscureText: true,
               decoration: const InputDecoration(
-                  fillColor: Colors.amber,
                   labelText: "Retype Password",
                   labelStyle: TextStyle(
                       color: MyColors.black,

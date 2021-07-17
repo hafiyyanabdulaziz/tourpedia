@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:tourpedia/utils/my_colors.dart';
 
 class ImageSlider extends StatefulWidget {
   const ImageSlider({Key? key, required this.images}) : super(key: key);
@@ -35,7 +36,7 @@ class _ImageSliderState extends State<ImageSlider> {
             items: widget.images
                 .map(
                   (item) => Container(
-                    color: Colors.amber,
+                    color: MyColors.greySecond,
                     child: Center(
                         child: Image.network(
                       item,
