@@ -4,7 +4,6 @@ import 'package:touchable_opacity/touchable_opacity.dart';
 import 'package:tourpedia/models/culinary_detail_model.dart';
 import 'package:tourpedia/services/culinary_services.dart';
 import 'package:tourpedia/services/favorite_services.dart';
-import 'package:tourpedia/ui/pages/detail.dart';
 import 'package:tourpedia/ui/widgets/card_must_see.dart';
 import 'package:tourpedia/ui/widgets/image_slider.dart';
 import 'package:tourpedia/ui/widgets/maps.dart';
@@ -346,7 +345,7 @@ class _DetailCulinaryState extends State<DetailCulinary> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => Detail(
+                                          builder: (context) => DetailCulinary(
                                               id: culinariesRandomModel
                                                   .data.item[index].id),
                                         ));
