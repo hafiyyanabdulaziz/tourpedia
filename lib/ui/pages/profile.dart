@@ -44,7 +44,7 @@ class _ProfileState extends State<Profile> {
               Text(
                 name,
                 style: const TextStyle(
-                    color: MyColors.white,
+                    color: MyColors.black,
                     fontWeight: FontWeight.w500,
                     fontSize: 20),
               ),
@@ -52,7 +52,7 @@ class _ProfileState extends State<Profile> {
               Text(
                 email,
                 style: const TextStyle(
-                    color: MyColors.white,
+                    color: MyColors.black,
                     fontWeight: FontWeight.w400,
                     fontSize: 15),
               ),
@@ -60,7 +60,7 @@ class _ProfileState extends State<Profile> {
               Text(
                 phone,
                 style: const TextStyle(
-                    color: MyColors.white,
+                    color: MyColors.black,
                     fontWeight: FontWeight.w400,
                     fontSize: 15),
               ),
