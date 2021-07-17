@@ -44,4 +44,24 @@ class SearchServices {
       return null;
     }
   }
+
+  Future<SearchTourismModel?> getDataDestinationsCategory(String text) async {
+    String url = Settings.urlBackend + '/api/destinations/?category=' + text;
+    try {
+      http.Response response = await http
+          .get(Uri.parse(url), headers: {"Accept": "aplication/json"});
+      if (response.statusCode == 200) {
+        debugPrint("data culinary search success");
+        final destinationsSearchModel =
+            searchTourismModelFromJson(response.body);
+        return destinationsSearchModel;
+      } else {
+        debugPrint("error status " + response.statusCode.toString());
+        return null;
+      }
+    } catch (e) {
+      debugPrint("error catch $e");
+      return null;
+    }
+  }
 }
