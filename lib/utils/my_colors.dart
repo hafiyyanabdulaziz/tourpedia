@@ -5,6 +5,7 @@ class MyColors {
   static const Color white = Colors.white;
   static const Color whiteSecond = Color(0xFFEEEEEE);
   static const Color whiteThird = Color(0xFFEAEAEA);
+  static const Color whiteFour = Color(0xFFFAFAFA);
   static const Color black = Colors.black;
   static const Color bluePrimary = Color(0xFF5A6EB7);
   static const Color blueSecondary = Color(0xFF2341E0);
