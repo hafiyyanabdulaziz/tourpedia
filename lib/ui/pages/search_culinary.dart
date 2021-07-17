@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tourpedia/models/search_culinary_model.dart';
 import 'package:tourpedia/services/search_services.dart';
 import 'package:tourpedia/ui/pages/detail_culinary.dart';
-import 'package:tourpedia/ui/widgets/card_explore.dart';
+import 'package:tourpedia/ui/widgets/card_culinary.dart';
 import 'package:tourpedia/utils/settings.dart';
 
 class SearchCulinary extends StatefulWidget {
@@ -41,25 +41,29 @@ class _SearchCulinaryState extends State<SearchCulinary> {
           ? const Center(child: CircularProgressIndicator())
           : (searchCulinaryModel.data.data.isEmpty)
               ? const Center(child: Text('Data tidak ada'))
-              : ListView.builder(
-                  shrinkWrap: true,
-                  physics: const ClampingScrollPhysics(),
-                  itemCount: searchCulinaryModel.data.data.length,
-                  itemBuilder: (context, index) => CardExplore(
-                    imageURL: Settings.urlBackend +
-                        '/storage/' +
-                        searchCulinaryModel
-                            .data.data[index].images[0].linkImage,
-                    isFavorite: false,
-                    name: searchCulinaryModel.data.data[index].title,
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DetailCulinary(
-                                id: searchCulinaryModel.data.data[index].id),
-                          ));
-                    },
+              : Padding(
+                  padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    physics: const ClampingScrollPhysics(),
+                    itemCount: searchCulinaryModel.data.data.length,
+                    itemBuilder: (context, index) => CardCulinary(
+                      bottom: 20,
+                      alamat: searchCulinaryModel.data.data[index].address,
+                      imageURL: Settings.urlBackend +
+                          '/storage/' +
+                          searchCulinaryModel
+                              .data.data[index].images[0].linkImage,
+                      name: searchCulinaryModel.data.data[index].title,
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailCulinary(
+                                  id: searchCulinaryModel.data.data[index].id),
+                            ));
+                      },
+                    ),
                   ),
                 ),
     );

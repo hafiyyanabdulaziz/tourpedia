@@ -8,14 +8,16 @@ class CardCulinary extends StatefulWidget {
   final String imageURL;
   final String name;
   final String alamat;
+  final double bottom;
 
-  const CardCulinary(
-      {Key? key,
-      required this.onTap,
-      required this.imageURL,
-      required this.name,
-      required this.alamat})
-      : super(key: key);
+  const CardCulinary({
+    Key? key,
+    required this.onTap,
+    required this.imageURL,
+    required this.name,
+    required this.alamat,
+    this.bottom = 0,
+  }) : super(key: key);
 
   @override
   State<CardCulinary> createState() => _CardCulinaryState();
@@ -28,6 +30,7 @@ class _CardCulinaryState extends State<CardCulinary> {
       onTap: widget.onTap,
       // ignore: avoid_unnecessary_containers
       child: Container(
+        margin: EdgeInsets.only(bottom: widget.bottom),
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(5)),
           boxShadow: [
