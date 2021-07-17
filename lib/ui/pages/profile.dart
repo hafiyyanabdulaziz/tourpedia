@@ -27,6 +27,7 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
       backgroundColor: MyColors.blueThird,
       appBar: AppBar(
+        backgroundColor: MyColors.bluePrimary,
         title: const Text('Profile'),
         centerTitle: true,
       ),

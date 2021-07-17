@@ -3,6 +3,7 @@ import 'package:tourpedia/models/search_culinary_model.dart';
 import 'package:tourpedia/services/search_services.dart';
 import 'package:tourpedia/ui/pages/detail_culinary.dart';
 import 'package:tourpedia/ui/widgets/card_culinary.dart';
+import 'package:tourpedia/utils/my_colors.dart';
 import 'package:tourpedia/utils/settings.dart';
 
 class SearchCulinary extends StatefulWidget {
@@ -36,7 +37,10 @@ class _SearchCulinaryState extends State<SearchCulinary> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Search')),
+      appBar: AppBar(
+        title: const Text('Search'),
+        backgroundColor: MyColors.bluePrimary,
+      ),
       body: (loading)
           ? const Center(child: CircularProgressIndicator())
           : (searchCulinaryModel.data.data.isEmpty)

@@ -42,7 +42,7 @@ class CardFavorited extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 10),
-            const Icon(Icons.favorite, color: MyColors.button),
+            const Icon(Icons.favorite, color: Colors.red),
           ],
         ),
       ),

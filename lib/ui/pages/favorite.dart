@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tourpedia/ui/pages/favorite_tab_culinary.dart';
 import 'package:tourpedia/ui/pages/favorite_tab_tourism.dart';
+import 'package:tourpedia/utils/my_colors.dart';
 
 class Favorite extends StatefulWidget {
   const Favorite({Key? key}) : super(key: key);
@@ -16,6 +17,7 @@ class _FavoriteState extends State<Favorite> {
         length: 2,
         child: Scaffold(
             appBar: AppBar(
+              backgroundColor: MyColors.bluePrimary,
               title: const Text('Favorite'),
               centerTitle: true,
               bottom: const TabBar(tabs: [

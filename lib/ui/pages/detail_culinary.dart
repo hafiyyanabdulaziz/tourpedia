@@ -4,6 +4,7 @@ import 'package:touchable_opacity/touchable_opacity.dart';
 import 'package:tourpedia/models/culinary_detail_model.dart';
 import 'package:tourpedia/services/culinary_services.dart';
 import 'package:tourpedia/services/favorite_services.dart';
+import 'package:tourpedia/ui/pages/detail.dart';
 import 'package:tourpedia/ui/widgets/card_must_see.dart';
 import 'package:tourpedia/ui/widgets/image_slider.dart';
 import 'package:tourpedia/ui/widgets/maps.dart';
@@ -98,7 +99,7 @@ class _DetailCulinaryState extends State<DetailCulinary> {
     return (loading)
         ? const Scaffold(body: Center(child: CircularProgressIndicator()))
         : Scaffold(
-            backgroundColor: MyColors.white,
+            backgroundColor: MyColors.whiteFour,
             body: ListView(
               children: [
                 Stack(
@@ -110,7 +111,7 @@ class _DetailCulinaryState extends State<DetailCulinary> {
                         height: 15,
                         width: MediaQuery.of(context).size.width,
                         decoration: const BoxDecoration(
-                            color: MyColors.white,
+                            color: MyColors.whiteFour,
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(15),
                                 topRight: Radius.circular(15))),
@@ -144,30 +145,50 @@ class _DetailCulinaryState extends State<DetailCulinary> {
                             });
                           },
                           child: Container(
-                            decoration: BoxDecoration(
-                              color: (isFavorite)
-                                  ? MyColors.button
-                                  : MyColors.white,
+                            decoration: const BoxDecoration(
+                              // color: (isFavorite)
+                              //     ? MyColors.button
+                              //     : MyColors.white,
+                              color: MyColors.white,
                               shape: BoxShape.circle,
                             ),
                             margin: const EdgeInsets.only(top: 20, right: 20),
                             padding: const EdgeInsets.all(5),
-                            child: const Icon(
-                              Icons.favorite_border,
-                              size: 30,
-                            ),
+                            child: (isFavorite)
+                                ? const Icon(
+                                    Icons.favorite,
+                                    size: 30,
+                                    color: Colors.red,
+                                  )
+                                : const Icon(
+                                    Icons.favorite_border,
+                                    size: 30,
+                                    //color: Colors.red,
+                                  ),
                           ),
                         ),
                       ],
                     ),
                   ],
                 ),
+                Center(
+                  child: Container(
+                    height: 5,
+                    width: 100,
+                    margin: const EdgeInsets.only(bottom: 30),
+                    decoration: const BoxDecoration(
+                      color: MyColors.white,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(5),
+                      ),
+                    ),
+                  ),
+                ),
                 /**
            * NAME
            */
                 Padding(
-                  padding: const EdgeInsets.only(
-                      left: 20, right: 20, top: 5, bottom: 15),
+                  padding: const EdgeInsets.only(left: 20, right: 20),
                   child: Text(
                     culinaryDetailModel.data.title,
                     style: const TextStyle(
@@ -176,208 +197,166 @@ class _DetailCulinaryState extends State<DetailCulinary> {
                     ),
                   ),
                 ),
-                //   Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //     // ignore: prefer_const_literals_to_create_immutables
-                //     children: [
-                //       /**
-                //  * REVIEW
-                //  */
-                //       Column(
-                //         children: [
-                //           Row(
-                //             // ignore: prefer_const_literals_to_create_immutables
-                //             children: [
-                //               const Icon(
-                //                 Icons.star_rounded,
-                //                 size: 30,
-                //                 color: MyColors.button,
-                //               ),
-                //               const Text(
-                //                 '4.5',
-                //                 style: TextStyle(fontSize: 18),
-                //               ),
-                //             ],
-                //           ),
-                //           const Text(
-                //             '20 Ulasan',
-                //             style: TextStyle(fontSize: 14),
-                //           ),
-                //         ],
-                //       ),
-                //       Column(
-                //         // ignore: prefer_const_literals_to_create_immutables
-                //         children: [
-                //           const Icon(
-                //             Icons.favorite_border,
-                //             size: 30,
-                //           ),
-                //           const Text('15 Favorites'),
-                //         ],
-                //       ),
-                //     ],
-                //   ),
+                Wrap(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: Text(
+                        'Harga = ' + culinaryDetailModel.data.price,
+                        style: const TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
                 /**
            * ABOUT
            */
-                const Padding(
-                  padding:
-                      EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 5),
-                  child: Text(
-                    'Tentang',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-                Padding(
+                Container(
+                  margin: const EdgeInsets.only(top: 12),
                   padding: const EdgeInsets.only(
-                      left: 20, right: 20, top: 5, bottom: 20),
-                  child: Text(
-                    culinaryDetailModel.data.description,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                    ),
+                      left: 20, right: 20, top: 5, bottom: 5),
+                  decoration: const BoxDecoration(
+                    color: MyColors.white,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      const Text(
+                        'Tentang',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        culinaryDetailModel.data.description,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                /**
-                 * HARGA
-                 */
-                const Padding(
-                  padding:
-                      EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 5),
-                  child: Text(
-                    'Harga',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-                Padding(
+                Container(
+                  margin: const EdgeInsets.only(top: 12, bottom: 20),
                   padding: const EdgeInsets.only(
-                      left: 20, right: 20, top: 5, bottom: 20),
-                  child: Text(
-                    culinaryDetailModel.data.price,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                    ),
+                      left: 20, right: 20, top: 5, bottom: 5),
+                  decoration: const BoxDecoration(
+                    color: MyColors.white,
                   ),
-                ),
-                /**
-                 * Restaurant
-                 */
-                const Padding(
-                  padding:
-                      EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 5),
-                  child: Text(
-                    'Restaurant',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-                const Padding(
-                  padding:
-                      EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 20),
-                  child: Text(
-                    'Restaurant',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                    ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      const Text(
+                        'Informasi',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(height: 7),
+                      const Text(
+                        'Jam Operasional',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      Text(
+                        culinaryDetailModel.data.time,
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            color: MyColors.black.withOpacity(0.7)),
+                      ),
+                      const SizedBox(height: 5),
+                      const Text(
+                        'Kontak',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      Text(
+                        culinaryDetailModel.data.contact,
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            color: MyColors.black.withOpacity(0.7)),
+                      ),
+                      const SizedBox(height: 5),
+                      const Text(
+                        'Alamat',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      Text(
+                        culinaryDetailModel.data.address,
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            color: MyColors.black.withOpacity(0.7)),
+                      ),
+                    ],
                   ),
                 ),
                 Maps(url: culinaryDetailModel.data.linkMaps),
-                const Padding(
-                  padding:
-                      EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 5),
-                  child: Text(
-                    'Rekomendasi Lainnya',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
+                Container(
+                  margin: const EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.only(top: 5, bottom: 5),
+                  decoration: const BoxDecoration(color: MyColors.white),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.only(left: 20, right: 20),
+                        child: Text(
+                          'Rekomendasi Lainnya',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      SizedBox(
+                        height: 200,
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            shrinkWrap: true,
+                            physics: const ClampingScrollPhysics(),
+                            itemCount: culinariesRandomModel.data.item.length,
+                            itemBuilder: (context, index) => CardMustSee(
+                                  image: culinariesRandomModel
+                                      .data.item[index].images[0].linkImage,
+                                  title: culinariesRandomModel
+                                      .data.item[index].title,
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => Detail(
+                                              id: culinariesRandomModel
+                                                  .data.item[index].id),
+                                        ));
+                                  },
+                                )),
+                      ),
+                      const SizedBox(height: 50),
+                    ],
                   ),
                 ),
-                // ignore: sized_box_for_whitespace
-                Container(
-                  height: 200,
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
-                      physics: const ClampingScrollPhysics(),
-                      itemCount: culinariesRandomModel.data.item.length,
-                      itemBuilder: (context, index) => CardMustSee(
-                            image: culinariesRandomModel
-                                .data.item[index].images[0].linkImage,
-                            title: culinariesRandomModel.data.item[index].title,
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => DetailCulinary(
-                                        id: culinariesRandomModel
-                                            .data.item[index].id),
-                                  ));
-                            },
-                          )),
-                ),
-                // Padding(
-                //   padding: const EdgeInsets.only(
-                //       left: 20, right: 20, top: 20, bottom: 5),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     // ignore: prefer_const_literals_to_create_immutables
-                //     children: [
-                //       const Text(
-                //         'Rating dan Ulasan',
-                //         style: TextStyle(
-                //           fontSize: 18,
-                //           fontWeight: FontWeight.w500,
-                //         ),
-                //       ),
-                //       ElevatedButton(
-                //         onPressed: () {},
-                //         child: const Text('Buat Ulasan'),
-                //       )
-                //     ],
-                //   ),
-                // ),
-                // Padding(
-                //   padding: const EdgeInsets.only(left: 20),
-                //   child: Row(
-                //     // ignore: prefer_const_literals_to_create_immutables
-                //     children: [
-                //       const Icon(
-                //         Icons.star_rounded,
-                //         size: 25,
-                //         color: MyColors.button,
-                //       ),
-                //       const Text(
-                //         '4.5 / 5',
-                //         style: TextStyle(fontSize: 15),
-                //       ),
-                //     ],
-                //   ),
-                // ),
-                // const Padding(
-                //   padding: EdgeInsets.only(left: 20),
-                //   child: Text(
-                //     '20 Ulasan',
-                //     style: TextStyle(fontSize: 14),
-                //   ),
-                // ),
-                // const CardRating(),
-                // const CardRating(),
-                // const CardRating(),
-                // const CardRating(),
-                // const CardRating(),
-                const SizedBox(height: 50),
               ],
             ),
           );
