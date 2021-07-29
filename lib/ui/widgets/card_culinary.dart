@@ -31,16 +31,16 @@ class _CardCulinaryState extends State<CardCulinary> {
       // ignore: avoid_unnecessary_containers
       child: Container(
         margin: EdgeInsets.only(bottom: widget.bottom),
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(5)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.05),
-              blurRadius: 0.0,
-              spreadRadius: 1.0,
-              offset: const Offset(1, 2.0), // shadow direction: bottom right
-            )
-          ],
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: Colors.black.withOpacity(0.05),
+          //     blurRadius: 0.0,
+          //     spreadRadius: 1.0,
+          //     offset: const Offset(1, 2.0), // shadow direction: bottom right
+          //   )
+          // ],
         ),
         //margin: const EdgeInsets.only(top: 10, bottom: 10),
         child: Column(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tourpedia/models/search_tourism_model.dart';
 import 'package:tourpedia/services/search_services.dart';
-import 'package:tourpedia/ui/pages/detail_culinary.dart';
+import 'package:tourpedia/ui/pages/detail.dart';
 import 'package:tourpedia/ui/widgets/card_explore.dart';
 import 'package:tourpedia/utils/my_colors.dart';
 import 'package:tourpedia/utils/settings.dart';
@@ -59,7 +59,7 @@ class _SearchTourismState extends State<SearchTourism> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => DetailCulinary(
+                            builder: (context) => Detail(
                                 id: searchTourismModel.data.data[index].id),
                           ));
                     },

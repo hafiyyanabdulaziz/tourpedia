@@ -75,7 +75,7 @@ class _RegisterState extends State<Register> {
           const Padding(
             padding: EdgeInsets.only(left: 24, top: 6, bottom: 52),
             child: Text(
-              'LOGIN',
+              'REGISTER',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
             ),
           ),
